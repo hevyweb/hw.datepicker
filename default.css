@@ -1,0 +1,35 @@
+.hw_monthLeft:before{
+    content: '<';
+}
+
+.hw_monthRight:before{
+    content: '>';
+}
+
+.hw_monthContainer{
+    display: table;
+}
+
+.hw_monthContainer *{
+    display: table-cell;
+}
+
+.hw_pickerBody {
+    display: table;
+}
+
+.hw_pickerBodyHeader{
+    display: table-header-group;
+}
+
+.hw_pickerBodyHeader *{
+    display: table-cell
+}
+
+.hw_week{
+    display: table-row;
+}
+
+.hw_week button{
+    display: table-cell;
+}
