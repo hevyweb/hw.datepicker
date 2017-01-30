@@ -65,6 +65,26 @@ var DatePicker = function(configs){
     
     var currentDate = configs.currentDate || new Date();
     
+    if (configs.minDate !== undefined){
+        var minDate = new Date(configs.minDate);
+        if (isNaN(minDate.getTime())){
+            throw new Exception('Min date is not valid');
+        }
+    }
+    
+    if (configs.maxDate !== undefined){
+        var maxDate = new Date(configs.maxDate);
+        if (isNaN(maxDate.getTime())){
+            throw new Exception('Max date is not valid');
+        }
+    }
+    
+    if (maxDate !=undefined && minDate != undefined){
+        if (minDate>maxDate){
+            throw new Exception('Min date is greater then max date.')
+        }
+    }
+    
     return {
         /**
          * Contains an instance of the current datepicker for those cases, when
@@ -80,7 +100,14 @@ var DatePicker = function(configs){
         
         dateFormat: 'dd.mm.yyyy',
         
-        onSelect: 'onSelect',
+        maxDate: maxDate,
+        
+        minDate: minDate,
+        
+        events: {
+            onSelect: null,
+            onMonthChange: null
+        },
         
         init: function(){
             var self = this;
@@ -96,46 +123,60 @@ var DatePicker = function(configs){
         render: function(){
             this.currentPicker = $('<div class="hw_datepicker" />');
             
-            this.renderMonthNavigation(currentDate.getMonth(), currentDate.getFullYear())
+            this.renderMonthNavigation(currentDate)
                 .appendTo(this.currentPicker);
             this.renderBody().appendTo(this.currentPicker);
             return this.currentPicker;
         },
         
-        renderMonthNavigation: function(month, year){
+        renderMonthNavigation: function(date){
             var self = this;
+            var date = new Date(date);
+            date.setDate(1);
+            var prevDate = new Date(date);
+            prevDate.setDate(0);
+            var next = new Date(date);
+            var onClick = function(e){
+                if ($(this).hasClass('hw_unavailable')){
+                    return;
+                }
+                self.monthChange(new Date(parseInt($(this).attr('data-date'))));
+                if (self.events.onMonthChange){
+                    self.events.onMonthChange(e);
+                }
+            };
+            
+            if (this.minDate && prevDate<=this.minDate){
+                //@TODO continue.
+            }
+            
             return $('<div class="hw_monthContainer" />')
             .append(
                 $('<button />').attr({
                     'type': 'button',
-                    'class': 'hw_monthLeft hw_mongthButton',
+                    'class': 'hw_monthLeft hw_monthButton',
                     'aria-label': DatePickerI18.Prev_month,
-                }).click(function(e){
-                    console.log('left button clicked');
-                })
+                    'data-date': prevDate.getTime()
+                }).click(onClick)
             )
             .append(
                 $('<div class="hw_currentMonth" />')
-                .html(DatePickerI18.month_name[month] + ' ' + year)
-                .click(function(e){
-                    self.redrawMonth();
-                })
+                .html(DatePickerI18.month_name[date.getMonth()] + ' ' + date.getFullYear())
             )
             .append(
                 $('<button />').attr({
                     'type': 'button',
-                    'class': 'hw_monthRight hw_mongthButton',
-                    'aria-label': DatePickerI18.Next_month
-                }).click(function(e){
-                    self.redrawMonth();
-                })
+                    'class': 'hw_monthRight hw_monthButton',
+                    'aria-label': DatePickerI18.Next_month,
+                    'data-date': next.setMonth(next.getMonth() + 1 )
+                }).click(onClick)
             );
         },
         
         renderBody: function(){
             return $('<div class="hw_pickerBody" />')
                 .append(this.renderBodyHeader())
-                .append(this.renderWeeks());
+                .append(this.renderWeeks(currentDate));
         },
         
         renderBodyHeader: function(){
@@ -151,8 +192,8 @@ var DatePicker = function(configs){
             return bodyHeader;
         },
         
-        renderWeeks: function(){
-            var dateTiker = new Date(currentDate),
+        renderWeeks: function(date){
+            var dateTiker = new Date(date),
             row,
             rows = [],
             week = 0,
@@ -179,8 +220,16 @@ var DatePicker = function(configs){
         renderCell: function(buttonDate, currentMonth){
             var self = this;
             var outOfMonth = (currentMonth != buttonDate.getMonth());
-            var className = outOfMonth ? 'hw_inactive' : '';
-            className = className + (buttonDate.getTime() == currentDate.getTime() ? ' hw_currentDate': '');
+            var className = [];
+            if (outOfMonth) {
+                className.push('hw_inactive');
+            }
+            if (buttonDate.getTime() == currentDate.getTime()){
+                className.push('hw_currentDate');
+            }
+            if ((this.maxDate && this.maxDate<=buttonDate) || (this.minDate && this.minDate>=buttonDate)){
+                className.push('hw_unavailable');
+            }
             
             var button = $('<button />')
                     .attr({
@@ -188,12 +237,15 @@ var DatePicker = function(configs){
                         'data-dayindex': buttonDate.getDay(),
                         'data-date':  buttonDate.getTime(),
                         'aria-hidden': (outOfMonth ? 'true' : 'false'),
-                        'class': className
+                        'class': className.join(' ')
                     })
                     .text(this.addFrontZeros(buttonDate.getDate()));
             if (!outOfMonth){
                 button.click(function(e){
-                    self['onSelect'].call(self, e);
+                    self.selectDate(e);
+                    if (self.events.onSelect){
+                        self.events['onSelect'].call(self, e);
+                    }
                 })
                 .hover(
                     function(){
@@ -228,7 +280,7 @@ var DatePicker = function(configs){
             return DatePickerI18.month_name[date.getMonth()] + ' ' + date.getDate() + ' ' + date.getFullYear();
         },
         
-        onSelect: function(e){
+        selectDate: function(e){
             var currentButton = $(e.currentTarget);
             var date = new Date();
             date.setTime(currentButton.attr('data-date'));
@@ -239,8 +291,13 @@ var DatePicker = function(configs){
             currentButton.addClass('hw_currentDate');
         },
         
-        onMonthChange: function(){
-            
+        monthChange: function(date){
+            this.currentPicker.find('.hw_week').remove();
+            this.currentPicker.find('.hw_pickerBody').append(this.renderWeeks(date));
+            this.currentPicker.find('.hw_currentMonth')
+                .html(DatePickerI18.month_name[date.getMonth()] + ' ' + date.getFullYear());
+            this.currentPicker.find('.hw_monthLeft').attr('data-date', date.setMonth(date.getMonth() - 1));
+            this.currentPicker.find('.hw_monthRight').attr('data-date', date.setMonth(date.getMonth() + 2));
         },
         
         getFormatedDate: function(date){

@@ -8,9 +8,15 @@
         <script src="./datepicker.js" type="text/javascript"></script>
         <script type="text/javascript">
             $(document).ready(function(){
+                var minDate = new Date();
+                minDate.setDate(-60);
+                var maxDate = new Date();
+                maxDate.setDate(maxDate.getDate()+1);
                 var datePicker = new DatePicker({
                     input: $('input'),
-                    trigger: $('button')
+                    trigger: $('button'),
+                    minDate: minDate,
+                    maxDate: maxDate
                 });
                 datePicker.init();
             });
