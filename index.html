@@ -9,9 +9,12 @@
         <script type="text/javascript">
             $(document).ready(function(){
                 var minDate = new Date();
-                minDate.setDate(-60);
+                minDate.setDate(minDate.getDate() - 60);
                 var maxDate = new Date();
                 maxDate.setDate(maxDate.getDate()+1);
+                
+                console.log(minDate);
+                
                 var datePicker = new DatePicker({
                     input: $('input'),
                     trigger: $('button'),

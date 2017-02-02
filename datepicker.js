@@ -33,7 +33,8 @@ var DatePickerI18 = {
         'Sa',
         'Su'
     ]
-}
+};
+
 
 var DatePicker = function(configs){
     if (configs.input === undefined){
@@ -130,47 +131,54 @@ var DatePicker = function(configs){
         },
         
         renderMonthNavigation: function(date){
-            var self = this;
-            var date = new Date(date);
-            date.setDate(1);
-            var prevDate = new Date(date);
-            prevDate.setDate(0);
-            var next = new Date(date);
-            var onClick = function(e){
-                if ($(this).hasClass('hw_unavailable')){
-                    return;
-                }
-                self.monthChange(new Date(parseInt($(this).attr('data-date'))));
-                if (self.events.onMonthChange){
-                    self.events.onMonthChange(e);
-                }
-            };
-            
-            if (this.minDate && prevDate<=this.minDate){
-                //@TODO continue.
-            }
+            var date = new Date(date),
+            prevMonthDate = this.getPrevMonthDate(date),
+            nextMonthDate = this.getNextMonthDate(date);
+            console.log(prevMonthDate);
+            var prevButton = this.renderMonthNavBtn(
+                DatePickerI18.Prev_month, 
+                prevMonthDate.getTime(),
+                'hw_monthLeft'
+            ).trigger('redraw', this.minDate && prevMonthDate<this.minDate);
+    
+            var nextButton = this.renderMonthNavBtn(
+                DatePickerI18.Next_month, 
+                nextMonthDate.getTime(),
+                'hw_monthRight'
+            ).trigger('redraw', this.maxDate && nextMonthDate>this.maxDate);
             
             return $('<div class="hw_monthContainer" />')
-            .append(
-                $('<button />').attr({
-                    'type': 'button',
-                    'class': 'hw_monthLeft hw_monthButton',
-                    'aria-label': DatePickerI18.Prev_month,
-                    'data-date': prevDate.getTime()
-                }).click(onClick)
-            )
+            .append(prevButton)
             .append(
                 $('<div class="hw_currentMonth" />')
                 .html(DatePickerI18.month_name[date.getMonth()] + ' ' + date.getFullYear())
             )
-            .append(
-                $('<button />').attr({
+            .append(nextButton);
+        },
+        
+        monthBtnClick: function(e){
+            if ($(this).hasClass('hw_unavailable')){
+                return;
+            }
+            self.monthChange(new Date(parseInt($(this).attr('data-date'))));
+            if (self.events.onMonthChange){
+                self.events.onMonthChange(e);
+            }
+        },
+        
+        renderMonthNavBtn: function(label, date, className){
+            return $('<button />').attr({
                     'type': 'button',
-                    'class': 'hw_monthRight hw_monthButton',
-                    'aria-label': DatePickerI18.Next_month,
-                    'data-date': next.setMonth(next.getMonth() + 1 )
-                }).click(onClick)
-            );
+                    'class': 'hw_monthButton ' + className,
+                    'aria-label': label,
+                    'data-date': date
+                }).on('redraw', function(inactive){
+                    if(inactive){
+                        $(this).addClass('hw_inactive').off('click');
+                    } else {
+                        $(this).removeClass('hw_inactive').on('click', this.monthBtnClick);
+                    }
+                });
         },
         
         renderBody: function(){
@@ -264,16 +272,25 @@ var DatePicker = function(configs){
             return (number < 10 ? '0' : '') + number;
         },
         
-        getLastDate: function(dateTiker)
+        getLastDate: function(date)
         {
-            var lastDate;
-            if (dateTiker.getMonth() == 11){
-                lastDate = new Date(dateTiker.getFullYear(), 11, 31);
-            } else {
-                lastDate = new Date(dateTiker.getFullYear(), dateTiker.getMonth()+1, 1);
-                lastDate.setDate(0);
-            }
+            var lastDate = new Date(date);
+            lastDate.setMonth(lastDate.getMonth() + 1);
+            lastDate.setDate(0);
             return lastDate;
+        },
+        
+        getNextMonthDate: function(date){
+            var nextMonthDate = new Date(date);
+            nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
+            nextMonthDate.setDate(1);
+            return nextMonthDate;
+        },
+        
+        getPrevMonthDate: function(date){
+            var prevMonthDate = new Date(date);
+            prevMonthDate.setDate(0);
+            return prevMonthDate;
         },
         
         getFullDate: function(date){
