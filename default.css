@@ -24,7 +24,10 @@
     color: white;
 }
 
-.hw_datepicker button.hw_inactive, .hw_datepicker button.hw_unavailable {
+.hw_datepicker button.hw_inactive {
+    display: none;
+}
+.hw_datepicker button.hw_unavailable {
     border: 1px solid silver;
     color: silver;
     cursor: initial;

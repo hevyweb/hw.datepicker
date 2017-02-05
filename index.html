@@ -12,14 +12,12 @@
                 minDate.setDate(minDate.getDate() - 60);
                 var maxDate = new Date();
                 maxDate.setDate(maxDate.getDate()+1);
-                
-                console.log(minDate);
-                
                 var datePicker = new DatePicker({
                     input: $('input'),
                     trigger: $('button'),
                     minDate: minDate,
-                    maxDate: maxDate
+                    maxDate: maxDate,
+                    startWithMonday: false,//true
                 });
                 datePicker.init();
             });

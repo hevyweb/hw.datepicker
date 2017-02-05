@@ -105,6 +105,8 @@ var DatePicker = function(configs){
         
         minDate: minDate,
         
+        startWithMonday: configs.startWithMonday || false,
+        
         events: {
             onSelect: null,
             onMonthChange: null
@@ -134,7 +136,7 @@ var DatePicker = function(configs){
             var date = new Date(date),
             prevMonthDate = this.getPrevMonthDate(date),
             nextMonthDate = this.getNextMonthDate(date);
-            console.log(prevMonthDate);
+
             var prevButton = this.renderMonthNavBtn(
                 DatePickerI18.Prev_month, 
                 prevMonthDate.getTime(),
@@ -157,9 +159,7 @@ var DatePicker = function(configs){
         },
         
         monthBtnClick: function(e){
-            if ($(this).hasClass('hw_unavailable')){
-                return;
-            }
+            var self = e.data.self;
             self.monthChange(new Date(parseInt($(this).attr('data-date'))));
             if (self.events.onMonthChange){
                 self.events.onMonthChange(e);
@@ -167,16 +167,19 @@ var DatePicker = function(configs){
         },
         
         renderMonthNavBtn: function(label, date, className){
+            var self = this;
             return $('<button />').attr({
                     'type': 'button',
                     'class': 'hw_monthButton ' + className,
                     'aria-label': label,
                     'data-date': date
-                }).on('redraw', function(inactive){
+                }).on('redraw', function(e, inactive){
                     if(inactive){
-                        $(this).addClass('hw_inactive').off('click');
+                        if (!$(this).hasClass('hw_unavailable')){
+                            $(this).addClass('hw_unavailable').off('click');
+                        }
                     } else {
-                        $(this).removeClass('hw_inactive').on('click', this.monthBtnClick);
+                        $(this).removeClass('hw_unavailable').on('click', {'self': self}, self.monthBtnClick);
                     }
                 });
         },
@@ -189,7 +192,7 @@ var DatePicker = function(configs){
         
         renderBodyHeader: function(){
             var bodyHeader = $('<div class="hw_pickerBodyHeader" />');
-            if (!configs.startWithMonday){
+            if (!this.startWithMonday){
                 DatePickerI18.week_name_full.unshift(DatePickerI18.week_name_full.pop());
                 DatePickerI18.week_name_short.unshift(DatePickerI18.week_name_short.pop());
             }
@@ -207,7 +210,8 @@ var DatePicker = function(configs){
             week = 0,
             lastDay = this.getLastDate(dateTiker),
             currentMonth = dateTiker.getMonth();
-            dateTiker.setDate(1 - dateTiker.getDay());
+            dateTiker.setDate(1);console.log(dateTiker.getDay());
+            dateTiker.setDate((this.startWithMonday ? 2 : 1) - dateTiker.getDay());
             while(dateTiker <= lastDay){
                 row = this.renderRow(week);
                 for (var day = 0; day<7; day++){
@@ -277,19 +281,28 @@ var DatePicker = function(configs){
             var lastDate = new Date(date);
             lastDate.setMonth(lastDate.getMonth() + 1);
             lastDate.setDate(0);
+            lastDate.setHours(0);
+            lastDate.setMinutes(0);
+            lastDate.setSeconds(0);
             return lastDate;
         },
         
         getNextMonthDate: function(date){
             var nextMonthDate = new Date(date);
-            nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
+            nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);//console.log(nextMonthDate);
             nextMonthDate.setDate(1);
+            nextMonthDate.setHours(0);
+            nextMonthDate.setMinutes(0);
+            nextMonthDate.setSeconds(0);//console.log(date, nextMonthDate);
             return nextMonthDate;
         },
         
         getPrevMonthDate: function(date){
             var prevMonthDate = new Date(date);
             prevMonthDate.setDate(0);
+            prevMonthDate.setHours(0);
+            prevMonthDate.setMinutes(0);
+            prevMonthDate.setSeconds(0);
             return prevMonthDate;
         },
         
@@ -308,13 +321,20 @@ var DatePicker = function(configs){
             currentButton.addClass('hw_currentDate');
         },
         
-        monthChange: function(date){
+        monthChange: function(date){//console.log(date);
             this.currentPicker.find('.hw_week').remove();
             this.currentPicker.find('.hw_pickerBody').append(this.renderWeeks(date));
             this.currentPicker.find('.hw_currentMonth')
                 .html(DatePickerI18.month_name[date.getMonth()] + ' ' + date.getFullYear());
-            this.currentPicker.find('.hw_monthLeft').attr('data-date', date.setMonth(date.getMonth() - 1));
-            this.currentPicker.find('.hw_monthRight').attr('data-date', date.setMonth(date.getMonth() + 2));
+            var prevMonthDate = this.getPrevMonthDate(date),
+            nextMonthDate = this.getNextMonthDate(date);
+//console.log(prevMonthDate);console.log(nextMonthDate);
+            this.currentPicker.find('.hw_monthLeft')
+                .trigger('redraw', this.minDate && prevMonthDate<this.minDate)
+                .attr('data-date', prevMonthDate.getTime());
+            this.currentPicker.find('.hw_monthRight')
+                .trigger('redraw', this.maxDate && nextMonthDate>this.maxDate)
+                .attr('data-date', nextMonthDate.getTime());
         },
         
         getFormatedDate: function(date){
