@@ -141,13 +141,13 @@ var DatePicker = function(configs){
                 DatePickerI18.Prev_month, 
                 prevMonthDate.getTime(),
                 'hw_monthLeft'
-            ).trigger('redraw', this.minDate && prevMonthDate<this.minDate);
+            ).trigger('redraw', this.minDate && prevMonthDate<=this.minDate);
     
             var nextButton = this.renderMonthNavBtn(
                 DatePickerI18.Next_month, 
                 nextMonthDate.getTime(),
                 'hw_monthRight'
-            ).trigger('redraw', this.maxDate && nextMonthDate>this.maxDate);
+            ).trigger('redraw', this.maxDate && nextMonthDate>=this.maxDate);
             
             return $('<div class="hw_monthContainer" />')
             .append(prevButton)
@@ -175,11 +175,9 @@ var DatePicker = function(configs){
                     'data-date': date
                 }).on('redraw', function(e, inactive){
                     if(inactive){
-                        if (!$(this).hasClass('hw_unavailable')){
-                            $(this).addClass('hw_unavailable').off('click');
-                        }
+                        $(this).addClass('hw_unavailable').off('click');
                     } else {
-                        $(this).removeClass('hw_unavailable').on('click', {'self': self}, self.monthBtnClick);
+                        $(this).removeClass('hw_unavailable').off('click').on('click', {'self': self}, self.monthBtnClick);
                     }
                 });
         },
@@ -210,7 +208,7 @@ var DatePicker = function(configs){
             week = 0,
             lastDay = this.getLastDate(dateTiker),
             currentMonth = dateTiker.getMonth();
-            dateTiker.setDate(1);console.log(dateTiker.getDay());
+            dateTiker.setDate(1);
             dateTiker.setDate((this.startWithMonday ? 2 : 1) - dateTiker.getDay());
             while(dateTiker <= lastDay){
                 row = this.renderRow(week);
@@ -289,11 +287,11 @@ var DatePicker = function(configs){
         
         getNextMonthDate: function(date){
             var nextMonthDate = new Date(date);
-            nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);//console.log(nextMonthDate);
+            nextMonthDate.setMonth(nextMonthDate.getMonth() + 1);
             nextMonthDate.setDate(1);
             nextMonthDate.setHours(0);
             nextMonthDate.setMinutes(0);
-            nextMonthDate.setSeconds(0);//console.log(date, nextMonthDate);
+            nextMonthDate.setSeconds(0);
             return nextMonthDate;
         },
         
@@ -321,19 +319,19 @@ var DatePicker = function(configs){
             currentButton.addClass('hw_currentDate');
         },
         
-        monthChange: function(date){//console.log(date);
+        monthChange: function(date){
             this.currentPicker.find('.hw_week').remove();
             this.currentPicker.find('.hw_pickerBody').append(this.renderWeeks(date));
             this.currentPicker.find('.hw_currentMonth')
                 .html(DatePickerI18.month_name[date.getMonth()] + ' ' + date.getFullYear());
             var prevMonthDate = this.getPrevMonthDate(date),
             nextMonthDate = this.getNextMonthDate(date);
-//console.log(prevMonthDate);console.log(nextMonthDate);
+
             this.currentPicker.find('.hw_monthLeft')
-                .trigger('redraw', this.minDate && prevMonthDate<this.minDate)
+                .trigger('redraw', this.minDate && prevMonthDate<=this.minDate)
                 .attr('data-date', prevMonthDate.getTime());
             this.currentPicker.find('.hw_monthRight')
-                .trigger('redraw', this.maxDate && nextMonthDate>this.maxDate)
+                .trigger('redraw', this.maxDate && nextMonthDate>=this.maxDate)
                 .attr('data-date', nextMonthDate.getTime());
         },
         
