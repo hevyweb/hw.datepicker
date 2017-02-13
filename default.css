@@ -82,3 +82,7 @@
     width: 100%;
     text-align: center;
 }
+
+.hw_closed{
+    display: none;
+}
