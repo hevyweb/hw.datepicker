@@ -119,16 +119,7 @@ var DatePicker = function(configs){
         },
         
         render: function(){
-            var self = this;
-            this.currentPicker = $('<div class="hw_datepicker" tabindex="0" role="application" />');
-            $('body').click(function(e){
-                
-                if (self.events.onClose){
-                    self.events.onClose.call(self);
-                }
-                self.close();                
-            });
-            
+            this.currentPicker = $('<div class="hw_datepicker hw_closed" aria-hidden="true" tabindex="0" role="application" />');
             this.renderMonthNavigation(currentDate)
                 .appendTo(this.currentPicker);
             this.renderBody().appendTo(this.currentPicker);
@@ -179,7 +170,7 @@ var DatePicker = function(configs){
                 }).on('redraw', function(e, inactive){
                     if(inactive){
                         $(this).addClass('hw_unavailable').attr('aria-disabled', 'true').off('click');
-                    } else {console.log(this);
+                    } else {
                         $(this).removeClass('hw_unavailable').removeAttr('aria-disabled').off('click').on('click', {'self': self}, self.monthBtnClick);
                     }
                 });
@@ -338,14 +329,16 @@ var DatePicker = function(configs){
                 .attr('data-date', nextMonthDate.getTime());
         },
         
-        onBodyClickCloseEvent: function(e){
-            var self = e.data.self;
+        onBodyClickCloseEvent: function(e){console.log(this.currentPicker.is(e.target));
+            if (!this.currentPicker.find(e.target).length && !this.currentPicker.is(e.target) && !this.trigger.is(e.target)){
+                this.close();
+            }
         },
         
         open: function(){
             if (!this.currentPicker) {
                 $(container).append(this.render());                
-                $('body').click(this.onBodyClickCloseEvent);
+                $('body').click($.proxy(this.onBodyClickCloseEvent, this));
             }
 
             this.currentPicker.removeClass('hw_closed').removeAttr('aria-hidden');
@@ -356,7 +349,10 @@ var DatePicker = function(configs){
         },
         
         close: function(){
-            $(this.currentPicker).addClass('hw_closed').attr('aria-hidden', 'true');
+            if (this.events.onSelect){
+                this.events.onSelect.call(this, e);
+            }
+            this.currentPicker.addClass('hw_closed').attr('aria-hidden', 'true');
             $('body').off('click', this.onBodyClickCloseEvent);
         },
         
