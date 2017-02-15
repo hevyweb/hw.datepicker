@@ -7,6 +7,7 @@
     font-size: 12px;
     color: #005C9D;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+    background: #ffffff;
 }
 
 .hw_datepicker button{
@@ -35,10 +36,13 @@
 }
 
 .hw_datepicker button.hw_currentDate{
-    background: #A6D7E8;
-    border: 1px solid #005C9D;
+    font-weight: bold;
+    border: 1px solid #ED3125;
 }
 
+.hw_datepicker button.hw_selectedDate{
+    background: #A6D7E8;
+}
 
 .hw_monthLeft:before{
     content: '<';
