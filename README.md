@@ -164,7 +164,7 @@ Default:
 
 
 ## Demo page
-[https://hevyweb.github.io/datepicker](https://hevyweb.github.io/datepicker)
+[https://hevyweb.github.io/hw.datepicker](https://hevyweb.github.io/hw.datepicker/index.html)
 
 ### Author
 **Dmytro Dzyuba**
