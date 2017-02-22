@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Hevyweb Datepicker</title>
+    <!-- template -->
+    <style>*{padding:0;margin:0}body{font-family:'Rokkitt',serif;font-size:17px;background:#e7e2cf;color:#858175}img{border:none}h1{font-family:'Lobster Two',cursive;font-size:24px;color:#446396;font-weight:400}h2{font-family:'Rokkitt',serif;font-size:21px;color:#d65a3d;font-weight:400}a{text-decoration:none;color:#385074}a:hover{color:#b34a30}pre{background:#B64C32;border:2px solid #fff;color:#fff;padding:10px;box-shadow:0 0 10px rgba(0,0,0,0.6) inset;border-radius:5px;word-break:break-all;overflow:hidden}iframe{border:0;padding:0;margin:0}input{border:1px solid grey;border-radius:5px 0 0 5px;color:#858175;height:30px;line-height:30px;padding:0 10px}p>button{border:1px solid grey;border-radius:0 5px 5px 0;cursor:pointer;height:32px;margin:0;padding:0 5px}p>input,p>button{float:left}.clear{clear:both}.floatLeft{float:left}.marRight40{margin-right:40px}.marRight30{margin-right:30px}.marTop{margin-top:30px}.bg-bottom-none{background:none bottom!important}.page-wrap{width:960px;overflow:hidden;margin:0 auto}.page{width:960px;overflow:hidden;margin:0 auto}.wrap{overflow:hidden}.box{width:460px;float:left;margin-bottom:40px}.button{background:#3B547B;width:80px;height:30px;text-align:center;margin-top:20px;color:#fff;line-height:30px;vertical-align:middle;cursor:pointer;}.button:hover{background:#B64C32}.button::after{border-color: transparent #d4cebe transparent transparent;border-style: solid; border-width: 15px;content: " ";display: block;float: right;height: 0;width: 0;}.button a{line-height:30px;color:#fff;text-decoration:none}.button a:hover{color:#fff}.header-wrap{width:960px;margin:0 auto 50px}.logo{margin:0 auto;width:400px;margin-top:40px;margin-bottom:40px}.logo h1{font-size:54px;color:#446396;text-align:center}.panel{overflow:hidden;background:#D4CEBE;padding:30px}.title{margin-bottom:20px;margin-top:15px}.content p{padding-bottom:10px}.content img{margin-right:30px;float:left;border: 12px solid #fff;}.copyright-wrap{overflow:hidden}.copyright{width:960px;margin:0 auto;padding-top:40px;padding-bottom:20px}.copyright .content p{color:#b94d32;font-size:17px}.copyright .content p a.link{text-decoration:none;color:#b94d32}.copyright .content p a.link:hover{color:#385074}.example::after{content:' ';clear:both;display:block}.code{height:0;overflow:hidden}</style>
+    <link href='http://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
+    <!-- dependency -->
+    <script src="https://code.jquery.com/jquery-1.11.3.js" type="text/javascript"></script>
+    <!-- Hevyweb datepicker -->
+    <link href="../src/hw.datepicker.css" rel="stylesheet" type="text/css" />
+    <script src="./ua.utf8.js" type="text/javascript"></script>
+    <script src="../src/hw.datepicker.js" type="text/javascript"></script>
+    <!-- demo -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var datePicker1 = new DatePicker({
+                input: $('#hw_example_input1'),
+                trigger: $('#hw_example_button1')
+            });
+            datePicker1.init();
+
+            var minDate = new Date();
+            minDate.setDate(minDate.getDate() - 60);
+
+            var maxDate = new Date();
+            maxDate.setDate(maxDate.getDate() + 1);
+
+            var selectedDate = new Date();
+            selectedDate.setDate(selectedDate.getDate() - 90);
+
+            var date = datePicker1.i18n.monthName[minDate.getMonth()].substring(0,3) + ' ' + minDate.getDate() + ', ' + minDate.getFullYear() + ' - ' +
+                    datePicker1.i18n.monthName[maxDate.getMonth()].substring(0,3) + ' ' + maxDate.getDate() + ', ' + maxDate.getFullYear();
+
+            $('#daterange').append($('<span />').html(date));
+
+            $('#hw_example_input2').val(selectedDate.getDate()+'.'+(selectedDate.getMonth()+1)+'.'+selectedDate.getFullYear());
+
+            var datePicker2 = new DatePicker({
+                input: $('#hw_example_input2'),
+                trigger: $('#hw_example_button2'),
+                minDate: minDate,
+                maxDate: maxDate
+                });
+            datePicker2.init();
+
+            var datePicker3 = new DatePicker({
+                input: $('#hw_example_input3'),
+                trigger: $('#hw_example_button3'),
+                startWithMonday: true
+                });
+            datePicker3.init();
+
+            var datePicker4 = new DatePicker({
+                input: $('#hw_example_input4'),
+                trigger: $('#hw_example_button4'),
+                dateFormat: 'mm/dd/yyyy'
+                });
+            datePicker4.init();
+
+            var datePicker5 = new DatePicker({
+                input: $('#hw_example_input5'),
+                trigger: $('#hw_example_button5'),
+                events: {
+                    onMonthChange: function(date, e){
+                        console.log(this);
+                        console.log(e);
+                        console.log(date);
+                        alert('Month changed');
+                    },
+                    onSelect: function(e){
+                        console.log(this);
+                        console.log(e);
+                        alert('Date selected');
+                    },
+                    onOpen: function(){
+                        console.log(this);
+                        alert('Opened.');
+                    },
+                    onClose: function(e){
+                        console.log(this);
+                        console.log(e);
+                        alert('Closed.');
+                    }
+                }
+                });
+            datePicker5.init();
+
+            var datePicker6 = new DatePicker({
+                input: $('#hw_example_input6'),
+                trigger: $('#hw_example_button6'),
+                startWithMonday: true,
+                i18n: DatePickerI18n
+            });
+            datePicker6.init();
+
+            $('.button').click(function(e){
+                e.preventDefault();
+                var codeBlock = $(this).prev('.code');
+                if (codeBlock.hasClass('visible')){
+                    codeBlock.stop().animate({
+                        'height': 0
+                    }, 500, function(){
+                        $(this).removeClass('visible');
+                    });
+                } else {
+                    var height = codeBlock.find('pre').outerHeight();
+                    codeBlock.stop().addClass('visible').animate({
+                        'height': height
+                    }, 500);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="header-wrap">
+    <div class="logo">
+        <h1>Hevyweb datepicker</h1>
+    </div>
+    <div class="page-wrap">
+        <div class="wrap">
+            <div class="box marRight40">
+                <div class="panel">
+                    <div class="title">
+                        <h1>Simple example</h1>
+                        <h2>just try it...</h2>
+                    </div>
+                    <div class="content">
+                        <p class="example">
+                            <input type="text" id="hw_example_input1" placeholder="dd.mm.yyyy" />
+                            <button id="hw_example_button1">pick</button>
+                        </p>
+                        <div class="clear"></div>
+                        <p>Click on the button above to display the date picker. It appears under the input field. Select the date.</p>
+                        <div class="code">
+                            <pre>
+var datePicker = new DatePicker({
+    input: $('input'),
+    trigger: $('button')
+    });
+
+datePicker.init();
+                            </pre>
+                        </div>
+                        <div class="button">Code</div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="panel">
+                    <div class="title">
+                        <h1>It can start with Monday</h1>
+                        <h2>by default it starts with Sanday</h2>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="content">
+                        <p class="example">
+                            <input type="text" id="hw_example_input3" />
+                            <button id="hw_example_button3">pick</button>
+                        </p>
+                        <div class="clear"></div>
+                        <p>For some countries calendar starts with Monday and for other - with Sunday.</p>
+                        <div class="code">
+                            <pre>
+var datePicker = new DatePicker({
+    input: $('input'),
+    trigger: $('button'),
+    startWithMonday: true
+    });
+
+datePicker.init();
+                            </pre>
+                        </div>
+                        <div class="button">Code</div>
+                    </div>
+                </div>
+            </div>
+            <div class="box marRight40">
+                <div class="panel">
+                    <div class="title">
+                        <h1>Example with date range</h1>
+                        <h2 id="daterange">Date range: </h2>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="content">
+                        <p class="example">
+                            <input type="text" id="hw_example_input2" />
+                            <button id="hw_example_button2">pick</button>
+                        </p>
+                        <div class="clear"></div>
+                        <p>Dates which are out of range - disabled. You can not select them. Initially, datepicker accepts the date, which is out of range, but if you try to enter the date manually in the input field, it ignores that value. </p>
+                        <p>If all dates of the previous month are disabled and there is no selected date at that month, appropriate navigation buttons are also disabled and you can not switch to that month.</p>
+                        <div class="code">
+                            <pre>
+var minDate = new Date();
+minDate.setDate(
+    minDate.getDate() - 60
+);
+
+var maxDate = new Date();
+maxDate.setDate(
+    maxDate.getDate() + 1
+);
+
+var selectedDate = new Date();
+selectedDate.setDate(
+    selectedDate.getDate() - 90
+);
+
+var datePicker = new DatePicker({
+    input: $('input'),
+    trigger: $('button'),
+    minDate: minDate,
+    maxDate: maxDate
+    });
+
+datePicker.init();
+                            </pre>
+                        </div>
+                        <div class="button">Code</div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="panel">
+                    <div class="title">
+                        <h1>Picker allows different date formats</h1>
+                        <h2>Date format mm/dd/yyyy</h2>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="content">
+                        <p class="example">
+                            <input type="text" id="hw_example_input4" placeholder="mm/dd/yyyy" value="08/28/2016" />
+                            <button id="hw_example_button4">pick</button>
+                        </p>
+                        <div class="clear"></div>
+                        <p>By default date format is "dd.mm.yyyy". However datepicker support different date formats: mm/dd/yyyy, yyyy-m-d etc.</p>
+                        <p><b>yyyy</b> - is a 4 digit year, <b>mm</b> - 2 digits month, single <b>m</b> - 1 or 2 digits month, <b>dd</b> - 2 digits day, single <b>d</b> - 1 or 2 digits day.</p>
+                        <div class="code">
+                            <pre>
+var datePicker = new DatePicker({
+    input: $('input'),
+    trigger: $('button'),
+    formatDate: 'mm/dd/yyyy'
+    });
+
+datePicker.init();
+                            </pre>
+                        </div>
+                        <div class="button">Code</div>
+                    </div>
+                </div>
+            </div> 
+            <div class="box marRight40">
+                <div class="panel">
+                    <div class="title">
+                        <h1>Different events on date picker</h1>
+                        <h2>customize the date picker on your own</h2>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="content">
+                        <p class="example">
+                            <input type="text" id="hw_example_input5" />
+                            <button id="hw_example_button5">pick</button>
+                        </p>
+                        <div class="clear"></div>
+                        <p>Currently date picker has 4 main events:</p>
+                        <ul>
+                            <li><b>onOpen</b> - event fires when datepicker appears, no matter is it the appearance or has been already closed.</li>
+                            <li><b>onSelect</b> - event fires when user picks the date. It accepts 1 parameter - initial jQuery click event.</li>
+                            <li><b>onMonthChange</b> - event is fired when user changes month. It accepts 2 parameters: Date object and initial jQuery click event.</li>
+                            <li><b>onClose</b> - event is fired when datepicker disappears. It accepts 1 parameter - initial jQuery click event.</li>
+                        </ul>
+                        <div class="code">
+                            <pre>
+var datePicker = new DatePicker({
+    input: $('input'),
+    trigger: $('button'),
+    events: {
+        onMonthChange: function(){
+          alert('Month changed');
+        },
+        onSelect: function(){
+          alert('Date selected.');
+        },
+        onOpen: function(){
+          alert('Opened.');
+        },
+        onClose: function(){
+          alert('Closed.');
+        }
+    }
+    });
+
+datePicker.init();
+                            </pre>
+                        </div>
+                        <div class="button">Code</div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="panel">
+                    <div class="title">
+                      <h1>Multi language support</h1>
+                      <h2>add your own language</h2>
+                    </div>
+                    <div class="content">
+                        <p class="example">
+                            <input type="text" id="hw_example_input6" />
+                            <button id="hw_example_button6">pick</button>
+                        </p>
+                        <div class="clear"></div>
+                        <p>
+                            The example above is in ukrainian. Initially datepicker is in english. In the source code for this example I left original english translation even though the datepicker is in english. It was made to show you which parameters should be set.
+                        </p>
+                        <div class="code">
+                            <pre>
+var datePicker = new DatePicker({
+    input: $('input'),
+    trigger: $('button'),
+    i18n: {
+        'prevMonth': 'Previous month',
+        'nextMonth': 'Next month',
+        'monthName': [
+            'January', 
+            'February', 
+            'March', 
+            'April', 
+            'May', 
+            'June', 
+            'July', 
+            'August', 
+            'September', 
+            'October', 
+            'November', 
+            'December'
+        ],
+        'weekNameFull': [
+            'Monday', 
+            'Tuesday', 
+            'Wednesday', 
+            'Thursday', 
+            'Friday', 
+            'Saturday', 
+            'Sunday'
+        ],
+        'weekNameShort': [
+            'Mo', 
+            'Tu', 
+            'We', 
+            'Th', 
+            'Fr', 
+            'Sa', 
+            'Su'
+        ]
+    }
+    });
+
+datePicker.init();
+                            </pre>
+                        </div>
+                        <div class="button">Code</div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="title">
+            <h1>A few words from author</h1>
+            <h2></h2>
+        </div>
+        <div class="content"> <img src="https://pp.vk.me/c604729/v604729156/28f48/WEos5URY8hE.jpg" alt="" />
+            <p>This is a first version of datepicker.  It is made to satisfy basic need:</p>
+            <ul>
+                <li>Pick dates using mouse</li>
+                <li>Enter dates manually and datepicker highlights them in the calendar.</li>
+                <li>You can change dates using navigation buttons.</li>
+                <li>It support different date formats.</li>
+                <li>Allows to add you own events for the datepicker.</li>
+                <li>Support possibility to start the week with Monday</li>
+                <li>Also initially it support 3 languages: english, ukrainian and russian</li>
+            </ul>
+            <br />
+            <p>In the future I plan to extand the functionality with additional features:</p>
+            <ul>
+                <li>Keyboard navigation</li>
+                <li>Full responsive support</li>
+                <li>Ability to be red by screen readers: NVDA and chromevox</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="copyright-wrap">
+    <div class="copyright">
+        <div class="content">
+            <p>Copyright &copy; 2017 Dmytro Dzyuba. Software released under MIT License</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

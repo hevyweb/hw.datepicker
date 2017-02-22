@@ -1,3 +1,13 @@
+/**
+ * Hevyweb datepicker
+ * 
+ * Default theme for the datepicker
+ * @link https://github.com/hevyweb/datepicker
+ * @author Dmytro Dzyuba <1932@bk.ru>
+ * @licence MIT
+ * @version 1.0.0
+ */
+
 .hw_datepicker{
     border: 1px solid silver;
     border-radius: 5px;
@@ -7,7 +17,8 @@
     font-size: 12px;
     color: #005C9D;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
-    background: #ffffff;
+    background: #F5F5F5;
+    width: 256px;
 }
 
 .hw_datepicker button{
@@ -16,13 +27,11 @@
     border-radius: 2px;
     margin: 2px;
     padding: 0;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    vertical-align: middle;        
     cursor: pointer;
-}
-
-.hw_datepicker button.hw_activeDay{
-    background: #005C9D;
-    border: 1px solid #005C9D;
-    color: white;
 }
 
 .hw_datepicker button.hw_inactive {
@@ -37,11 +46,22 @@
 
 .hw_datepicker button.hw_currentDate{
     font-weight: bold;
+    color: #ED3125;
     border: 1px solid #ED3125;
 }
 
 .hw_datepicker button.hw_selectedDate{
-    background: #A6D7E8;
+    background: #62a4b4;
+    border: 1px solid #62a4b4;
+    color: #fff;
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+}
+
+.hw_datepicker button.hw_activeDay{
+    background: #005C9D;
+    border: 1px solid #005C9D;
+    color: white;
 }
 
 .hw_monthLeft:before{
@@ -62,6 +82,7 @@
 
 .hw_pickerBody {
     display: table;
+    width: 100%;
 }
 
 .hw_pickerBodyHeader{
@@ -72,6 +93,7 @@
     display: table-cell;
     font-weight: bold;
     text-align: center;
+    line-height: 24px;
 }
 
 .hw_week{
