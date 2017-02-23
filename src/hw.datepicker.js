@@ -150,8 +150,36 @@ var DatePicker = function(configs){
         },
         
         render: function(){
-            this.currentPicker = $('<div class="hw_datepicker hw_closed" aria-hidden="true" tabindex="0" role="application" />').click(function(e){
+            var self = this;
+            this.currentPicker = $('<div class="hw_datepicker hw_closed" aria-hidden="true" tabindex="0" role="application" />')
+            .click(function(e){
                 e.stopPropagation();
+            })
+            .keydown(function(e){
+                var keyCode = e.which || e.keyCode;
+                switch(keyCode){
+                    case 37: //left
+                        e.preventDefault();
+                        self.focusDate(1, false);
+                        break;
+                    case 38: //up
+                        e.preventDefault();
+                        self.focusDate(7, false);
+                        break;
+                    case 39: //right
+                        e.preventDefault();
+                        self.focusDate(1, true);
+                        break;
+                    case 40: //down
+                        e.preventDefault();
+                        self.focusDate(7, true);
+                        break;
+                    case 33: //page up    
+                    case 34: //page down
+                    case 27: //esc
+                        self.close(e);
+                    case 36: //end
+                }
             });
             
             this.adjustPosition();
@@ -162,6 +190,26 @@ var DatePicker = function(configs){
                 .appendTo(this.currentPicker);
         
             return this.currentPicker;
+        },
+        
+        getActive: function(){
+            if (!this.active){
+                this.active = this.currentPicker.find('.hw_default').first();
+            }
+            return this.active;
+        },
+        
+        focusDate: function(days, future){
+            var newDate = new Date(this.activeDate);
+            newDate.setDate(newDate.getDate() + (future ? 1 : -1) * days);
+            if ((!future && (!this.minDate || newDate >= this.minDate)) ||
+                ( future && (!this.maxDate || newDate <= this.maxDate))){
+                if (this.activeDate.getMonth() != newDate.getMonth()){
+                    this.monthChange(newDate);
+                }
+                this.currentPicker.find('button[data-date=' + newDate.getTime() + ']').focus();
+                this.activeDate = newDate;
+            }
         },
         
         adjustPosition: function(){
@@ -297,6 +345,10 @@ var DatePicker = function(configs){
                 className.push('hw_selectedDate');
             }
             
+            if (!outOfMonth && !unavailable){
+                className.push('hw_default');
+            }
+            
             var button = $('<button />')
                     .attr({
                         'aria-label': this.getFullDate(buttonDate),
@@ -312,14 +364,20 @@ var DatePicker = function(configs){
                     self.selectDate(e);
                 })
                 .hover(
-                    function(){
-                        self.currentPicker.find('.hw_activeDay').removeClass('hw_activeDay');
-                        $(this).addClass('hw_activeDay');
+                    function(e){
+                        $(this).focus();
                     },
-                    function(){
-                        $(this).removeClass('hw_activeDay');
+                    function(e){
+                        $(this).blur();
                     }
-                );
+                )
+                .focus(function(e){
+                    self.currentPicker.find('.hw_activeDay').removeClass('hw_activeDay');
+                    $(this).addClass('hw_activeDay');
+                })
+                .blur(function(e){
+                    $(this).removeClass('hw_activeDay');
+                });
             }
             return $('<div class="hw_day" />').append(button);
         },
