@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hevyweb/datepicker.git"
+    "url": "git+https://github.com/hevyweb/hw.datepicker.git"
   },
   "keywords": [
     "datepicker",
@@ -17,7 +17,7 @@
   "author": "Dmytro Dzyuba <1932@bk.ru> (https://github.com/hevyweb)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hevyweb/datepicker/issues"
+    "url": "https://github.com/hevyweb/hw.datepicker/issues"
   },
-  "homepage": "https://github.com/hevyweb/datepicker#readme"
+  "homepage": "https://github.com/hevyweb/hw.datepicker#readme"
 }

@@ -1,44 +1,46 @@
 # hw.datepicker
+---
 
 > A jQuery datepicker library
 
 ## Usage
 
-1. Include datepicker StyleSheet
+* Include datepicker StyleSheet
 
 ```html
 <link rel="stylesheet" href="/libs/hw.datepicker/hw.datepicker.min.css">
 ```
      
-2. Include dependency: jQuery
+* Include dependency: jQuery
 
 ```html
 <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 ```
-3. Include plugin's code
 
-  ```html
-  <script src="/libs/hw.datepicker/hw.datepicker.min.js"></script>
-  ```
+* Include library's code
 
-4. Initialize the datepicker for concrete input field and its trigger
+```html
+<script src="/libs/hw.datepicker/hw.datepicker.min.js"></script>
+```
 
-  ```html
-  <input type="text" id="hw_datepicker" />
-  <button id="hw_datepicker_trigger">pick</button>
-  ```
+* Initialize the datepicker for concrete input field and its trigger
+
+```html
+<input type="text" id="hw_datepicker" />
+<button id="hw_datepicker_trigger">pick</button>
+```
   
- 5. And the initialization itself:
-  ```javascript
-  <script type="application/javascript">
-  var datePicker = new DatePicker({
+* And the initialization itself:
+```javascript
+var datePicker = new DatePicker({
     input: $('#hw_datepicker'),
     trigger: $('#hw_datepicker_trigger')
 });
 
-  datePicker.init();
-  </script>
-  ```
+datePicker.init();
+```
+
+---
 
 ## Required options
 
@@ -52,7 +54,25 @@ Type `jQuery`
 
 Any HTML element by clicking on which datepicker appears
 
+---
+
 ## Other options
+
+#### container
+Type `object|jQuery|string`
+Default `jQuery('body')`
+
+It is an HTML element, jQuery object or selector (e.g. class or id). Datepicker appears in this HTML element. I recommend to use parent element as a container, to make "tab" navigation work properly. However in most cases it is impossible, because parent might have styles which impact the datepicker, for example `overflow: hidden`
+
+```javascript
+var datePicker = new DatePicker({
+    input: $('#hw_datepicker'),
+    trigger: $('#hw_datepicker_trigger'),
+    container: $('#hw_datepicker').parent()
+});
+
+datePicker.init();
+```
 
 #### minDate, maxDate
 Type: `Date`
@@ -119,12 +139,12 @@ datePicker.init();
 Type: `Array`
 Default: `[]`
 
-|**Event Type**      |**Description**|
-|--------------|--------------|
-|onOpen    |This event fires when datepicker appears, no matter is it the appearance or has been already closed.|
-|onSelect   |This event fires when user picks the date. It accepts 1 parameter - initial jQuery click event.|
-|onMonthChange    |This event fires when user changes month. It accepts 2 parameters: Date object and initial jQuery click event. |
-|onClose  |This event fires when datepicker disappears. It accepts 1 parameter - initial jQuery click event.|
+|**Event Type**|**Description**|
+|--------------|---------------|
+|onOpen        |This event fires when datepicker appears, no matter is it the appearance or has been already closed.|
+|onSelect      |This event fires when user picks the date. It accepts 1 parameter - initial jQuery click event.|
+|onMonthChange |This event fires when user changes month. It accepts 2 parameters: Date object and initial jQuery click event. |
+|onClose       |This event fires when datepicker disappears. It accepts 1 parameter - initial jQuery click event.|
 
 ```javascript
 var datePicker = new DatePicker({
@@ -162,6 +182,24 @@ Default:
 }
 ```
 
+---
+## Keyboard navigation
+Datepicker supports keyboard navigation
+|**Key**     |**Action**|
+|------------|----------|
+|Arrow left  |next date|
+|Arrow right |previous date|
+|Arrow up    |1 week back|
+|Arrow down  |1 week ahead|
+|Home        |first day of the month|
+|End         |last day of the month|
+|Page up     |1 month back|
+|Page down   |1 month ahead|
+|Enter       |select current date|
+|Space       |select current date|
+|Esc         |close the datepicker|
+|Tab         |next date until the end of the current month|
+|Shift+Tab   |previous date until the very first day of the month and to the buttons, which change month|
 
 ## Demo page
 [https://hevyweb.github.io/hw.datepicker](https://hevyweb.github.io/hw.datepicker/index.html)
