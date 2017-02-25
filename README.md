@@ -60,6 +60,7 @@ Any HTML element by clicking on which datepicker appears
 
 #### container
 Type `object|jQuery|string`
+
 Default `jQuery('body')`
 
 It is an HTML element, jQuery object or selector (e.g. class or id). Datepicker appears in this HTML element. I recommend to use parent element as a container, to make "tab" navigation work properly. However in most cases it is impossible, because parent might have styles which impact the datepicker, for example `overflow: hidden`
@@ -76,6 +77,7 @@ datePicker.init();
 
 #### minDate, maxDate
 Type: `Date`
+
 Default: `null`
 
 Minimum and maximum date between which dates can be picked.
@@ -101,6 +103,7 @@ datePicker.init();
 
 #### startWithMonday
 Type: `Boolean`
+
 Default: `false`
 
 The week start with Sunday by default. To make it start from Monday, set this parameter to true.
@@ -116,6 +119,7 @@ datePicker.init();
 
 #### dateFormat
 Type: `String`
+
 Default: `dd.mm.yyyy`
 
 By default date format is "dd.mm.yyyy". However datepicker support different date formats: mm/dd/yyyy, yyyy-m-d etc.
@@ -137,6 +141,7 @@ datePicker.init();
 
 #### events
 Type: `Array`
+
 Default: `[]`
 
 |**Event Type**|**Description**|
@@ -171,6 +176,7 @@ datePicker.init();
 
 #### i18n
 Type: `object`
+
 Default: 
 ```javascript
 {
@@ -185,6 +191,7 @@ Default:
 ---
 ## Keyboard navigation
 Datepicker supports keyboard navigation
+
 |**Key**     |**Action**|
 |------------|----------|
 |Arrow left  |next date|
