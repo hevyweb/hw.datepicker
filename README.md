@@ -45,12 +45,12 @@ datePicker.init();
 ## Required options
 
 #### input
-Type: `jQuery`
+Type: `object|jQuery|string`
 
 Input tag, which is related to the datepicker
 
 #### trigger
-Type `jQuery`
+Type: `object|jQuery|string`
 
 Any HTML element by clicking on which datepicker appears
 
@@ -59,7 +59,7 @@ Any HTML element by clicking on which datepicker appears
 ## Other options
 
 #### container
-Type `object|jQuery|string`
+Type: `object|jQuery|string`
 
 Default `jQuery('body')`
 
