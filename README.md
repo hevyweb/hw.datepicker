@@ -150,6 +150,7 @@ Default: `[]`
 |onSelect      |This event fires when user picks the date. It accepts 1 parameter - initial jQuery click event.|
 |onMonthChange |This event fires when user changes month. It accepts 2 parameters: Date object and initial jQuery click event. |
 |onClose       |This event fires when datepicker disappears. It accepts 1 parameter - initial jQuery click event.|
+|onDateFocus   |This event fires when you focus any date. It accepts 2 parameter - initial jQuery click event and the date, which is focused.|
 
 ```javascript
 var datePicker = new DatePicker({
@@ -167,6 +168,9 @@ var datePicker = new DatePicker({
         },
         onClose: function(){
             alert('Closed.');
+        },
+        onDateFocus: function(){
+            alert('Date focused.');
         }
     }
 });

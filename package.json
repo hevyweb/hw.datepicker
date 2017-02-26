@@ -2,7 +2,7 @@
   "name": "hw.datepicker",
   "title": "Datepicker",
   "description": "A jQuery datepicker library",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hevyweb/hw.datepicker.git"

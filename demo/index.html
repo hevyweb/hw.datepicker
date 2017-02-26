@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Hevyweb Datepicker</title>
     <!-- template -->
-    <style>*{padding:0;margin:0}body{font-family:'Rokkitt',serif;font-size:17px;background:#e7e2cf;color:#858175}img{border:none}h1{font-family:'Lobster Two',cursive;font-size:24px;color:#446396;font-weight:400}h2{font-family:'Rokkitt',serif;font-size:21px;color:#d65a3d;font-weight:400}a{text-decoration:none;color:#385074}a:hover{color:#b34a30}pre{background:#B64C32;border:2px solid #fff;color:#fff;padding:10px;box-shadow:0 0 10px rgba(0,0,0,0.6) inset;border-radius:5px;word-break:break-all;overflow:hidden}iframe{border:0;padding:0;margin:0}input{border:1px solid grey;border-radius:5px 0 0 5px;color:#858175;height:30px;line-height:30px;padding:0 10px}p>button{border:1px solid grey;border-radius:0 5px 5px 0;cursor:pointer;height:32px;margin:0;padding:0 5px}p>input,p>button{float:left}.clear{clear:both}.floatLeft{float:left}.marRight40{margin-right:40px}.marRight30{margin-right:30px}.marTop{margin-top:30px}.bg-bottom-none{background:none bottom!important}.page-wrap{width:960px;overflow:hidden;margin:0 auto}.page{width:960px;overflow:hidden;margin:0 auto}.wrap{overflow:hidden}.box{width:460px;float:left;margin-bottom:40px}.button{background:#3B547B;width:80px;height:30px;text-align:center;margin-top:20px;color:#fff;line-height:30px;vertical-align:middle;cursor:pointer;}.button:hover{background:#B64C32}.button::after{border-color: transparent #d4cebe transparent transparent;border-style: solid; border-width: 15px;content: " ";display: block;float: right;height: 0;width: 0;}.button a{line-height:30px;color:#fff;text-decoration:none}.button a:hover{color:#fff}.header-wrap{width:960px;margin:0 auto 50px}.logo{margin:0 auto;width:400px;margin-top:40px;margin-bottom:40px}.logo h1{font-size:54px;color:#446396;text-align:center}.panel{overflow:hidden;background:#D4CEBE;padding:30px}.title{margin-bottom:20px;margin-top:15px}.content p{padding-bottom:10px}.content img{margin-right:30px;float:left;border: 12px solid #fff;}.copyright-wrap{overflow:hidden}.copyright{width:960px;margin:0 auto;padding-top:40px;padding-bottom:20px}.copyright .content p{color:#b94d32;font-size:17px}.copyright .content p a.link{text-decoration:none;color:#b94d32}.copyright .content p a.link:hover{color:#385074}.example::after{content:' ';clear:both;display:block}.code{height:0;overflow:hidden}</style>
+    <style>*{padding:0;margin:0}body{font-family:'Rokkitt',serif;font-size:17px;background:#e7e2cf;color:#858175}img{border:none}h1{font-family:'Lobster Two',cursive;font-size:24px;color:#446396;font-weight:400}h2{font-family:'Rokkitt',serif;font-size:21px;color:#d65a3d;font-weight:400}a{text-decoration:none;color:#385074}a:hover{color:#b34a30}pre{background:#B64C32;border:2px solid #fff;color:#fff;padding:10px;box-shadow:0 0 10px rgba(0,0,0,0.6) inset;border-radius:5px;word-break:break-all;overflow:hidden}iframe{border:0;padding:0;margin:0}input{border:1px solid grey;border-radius:5px 0 0 5px;color:#858175;height:30px;line-height:30px;padding:0 10px}p>button{border:1px solid grey;border-radius:0 5px 5px 0;cursor:pointer;height:32px;margin:0;padding:0 5px}p>input,p>button{float:left}.clear{clear:both}.floatLeft{float:left}.marRight40{margin-right:40px}.marRight30{margin-right:30px}.marTop{margin-top:30px}.bg-bottom-none{background:none bottom!important}.page-wrap{width:960px;overflow:hidden;margin:0 auto}.page{width:960px;overflow:hidden;margin:0 auto}.wrap{overflow:hidden}.box{width:460px;float:left;margin-bottom:40px}.button{background:#3B547B;width:80px;height:30px;text-align:center;margin-top:20px;color:#fff;line-height:30px;vertical-align:middle;cursor:pointer;}.button:hover{background:#B64C32}.button::after{border-color: transparent #d4cebe transparent transparent;border-style: solid; border-width: 15px;content: " ";display: block;float: right;height: 0;width: 0;}.button a{line-height:30px;color:#fff;text-decoration:none}.button a:hover{color:#fff}.header-wrap{width:960px;margin:0 auto 50px}.logo{margin:0 auto;width:400px;margin-top:40px;margin-bottom:40px}.logo h1{font-size:54px;color:#446396;text-align:center}.panel{overflow:hidden;background:#D4CEBE;padding:30px}.title{margin-bottom:20px;margin-top:15px}.content p{padding-bottom:10px}.content img{margin-right:30px;float:left;border: 12px solid #fff;}.copyright-wrap{overflow:hidden}.copyright{width:960px;margin:0 auto;padding-top:40px;padding-bottom:20px}.copyright .content p{color:#b94d32;font-size:17px}.copyright .content p a.link{text-decoration:none;color:#b94d32}.copyright .content p a.link:hover{color:#385074}.example::after{content:' ';clear:both;display:block}.code{height:0;overflow:hidden}table{border-collapse: collapse}td,th{border: 2px solid #eee;padding:5px}</style>
     <link href='https://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
     <!-- dependency -->
@@ -83,6 +83,11 @@
                         console.log(this);
                         console.log(e);
                         alert('Closed.');
+                    },
+                    onDateFocus: function(e, date){
+                        var date = datePicker1.i18n.monthName[date.getMonth()].substring(0,3) + ' ' + date.getDate() + ', ' + date.getFullYear();
+                        console.log(e);
+                        alert('Date Focused ' + date);
                     }
                 }
                 });
@@ -273,6 +278,7 @@ datePicker.init();
                             <li><b>onSelect</b> - event fires when user picks the date. It accepts 1 parameter - initial jQuery click event.</li>
                             <li><b>onMonthChange</b> - event is fired when user changes month. It accepts 2 parameters: Date object and initial jQuery click event.</li>
                             <li><b>onClose</b> - event is fired when datepicker disappears. It accepts 1 parameter - initial jQuery click event.</li>
+                            <li><b>onDateFocus</b> - event is fired when you focus any date. It accepts 2 parameter - initial jQuery click event and the date, which is focused.</li>
                         </ul>
                         <div class="code">
                             <pre>
@@ -291,6 +297,9 @@ var datePicker = new DatePicker({
         },
         onClose: function(){
           alert('Closed.');
+        },
+        onDateFocus: function(){
+          alert('Focused Date.');
         }
     }
     });
@@ -376,22 +385,93 @@ datePicker.init();
             <h2></h2>
         </div>
         <div class="content"> <img src="https://pp.vk.me/c604729/v604729156/28f48/WEos5URY8hE.jpg" alt="" />
-            <p>This is a first version of datepicker.  It is made to satisfy basic need:</p>
+            <p>I had a task to add nice datepicker, which has all basic needs and a little bit more. I checked a lot of them, but each one had some issue. The best of those I saw, was a jQuery UI datepicker, but I don't like that it's too big.</p>
+            <p>History:</p>
+            <b>1.0.0</b>
             <ul>
-                <li>Pick dates using mouse</li>
-                <li>Enter dates manually and datepicker highlights them in the calendar.</li>
+                <li>Pick dates using mouse.</li>
+                <li>You can type the date manually. Datepicker highlights it in the calendar.</li>
                 <li>You can change dates using navigation buttons.</li>
                 <li>It support different date formats.</li>
                 <li>Allows to add you own events for the datepicker.</li>
-                <li>Support possibility to start the week with Monday</li>
-                <li>Also initially it support 3 languages: english, ukrainian and russian</li>
+                <li>It can start the week with Monday.</li>
+                <li>You can use your own language.</li>
             </ul>
             <br />
-            <p>In the future I plan to extand the functionality with additional features:</p>
+            <b>1.1.0</b>
             <ul>
-                <li>Keyboard navigation</li>
+                <li>Added keyboard navigation
+                <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Arrow left</td>
+                        <td>next date</td>
+                    </tr>
+                    <tr>
+                        <td>Arrow right</td>
+                        <td>previous date</td>
+                    </tr>
+                    <tr>
+                        <td>Arrow up</td>
+                        <td>1 week back</td>
+                    </tr>
+                    <tr>
+                        <td>Arrow down</td>
+                        <td>1 week ahead</td>
+                    </tr>
+                    <tr>
+                        <td>Home</td>
+                        <td>first day of the month</td>
+                    </tr>
+                    <tr>
+                        <td>End</td>
+                        <td>last day of the month</td>
+                    </tr>
+                    <tr>
+                        <td>Page up</td>
+                        <td>1 month back</td>
+                    </tr>
+                    <tr>
+                        <td>Page down</td>
+                        <td>1 month ahead</td>
+                    </tr>
+                    <tr>
+                        <td>Enter</td>
+                        <td>select current date</td>
+                    </tr>
+                    <tr>
+                        <td>Space</td>
+                        <td>select current date</td>
+                    </tr>
+                    <tr>
+                        <td>Esc</td>
+                        <td>close the datepicker</td>
+                    </tr>
+                    <tr>
+                        <td>Tab</td>
+                        <td>next date until the end of the current month</td>
+                    </tr>
+                    <tr>
+                        <td>Shift+Tab</td>
+                        <td>previous date until the very first day of the month and to the buttons, which change month</td>
+                    </tr>
+                </tbody>
+            </table>
+                </li>
+                <li>Added new event <b>onDateFocus</b></li>
+            </ul>
+            <br>
+            <p><b>In the future I plan to extend the functionality with additional features:</b></p>
+            <ul>
                 <li>Full responsive support</li>
-                <li>Ability to be red by screen readers: NVDA and chromevox</li>
+                <li>Ability to be read by screen readers: NVDA and chromevox</li>
             </ul>
         </div>
     </div>
