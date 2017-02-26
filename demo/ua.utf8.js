@@ -3,10 +3,10 @@
  * 
  * Ukrainian language file for Hevyweb datepicker. This file has encoding UTF-8.
  * 
- * @link https://github.com/hevyweb/datepicker
+ * @link https://github.com/hevyweb/hw.datepicker
  * @author Dmytro Dzyuba <1932@bk.ru>
  * @licence MIT
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 var DatePickerI18n = {
