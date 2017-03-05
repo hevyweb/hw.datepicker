@@ -36,7 +36,12 @@
 
             $('#daterange').append($('<span />').html(date));
 
-            $('#hw_example_input2').val(selectedDate.getDate()+'.'+(selectedDate.getMonth()+1)+'.'+selectedDate.getFullYear());
+            var inputDate = 
+                datePicker1.addFrontZeros(selectedDate.getDate()) + '.' + 
+                datePicker1.addFrontZeros(selectedDate.getMonth()+1) + '.' + 
+                selectedDate.getFullYear();
+        
+            $('#hw_example_input2').val(inputDate);
 
             var datePicker2 = new DatePicker({
                 input: $('#hw_example_input2'),
