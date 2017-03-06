@@ -174,6 +174,7 @@ var DatePicker = function(configs) {
                     break;
                 case 33: //page up    
                     e.preventDefault();
+                    e.stopPropagation();
                     var newDate = new Date(this.activeDate);
                     newDate.setMonth(newDate.getMonth() - 1);
                     if (this.activeDate.getMonth() - newDate.getMonth() == 0) {
@@ -183,6 +184,7 @@ var DatePicker = function(configs) {
                     break;
                 case 34: //page down
                     e.preventDefault();
+                    e.stopPropagation();
                     var newDate = new Date(this.activeDate);
                     newDate.setMonth(newDate.getMonth() + 1);
                     if (newDate.getMonth() - this.activeDate.getMonth() > 1) {
@@ -198,29 +200,35 @@ var DatePicker = function(configs) {
                     break;
                 case 36: //home
                     e.preventDefault();
+                    e.stopPropagation();
                     var newDate = new Date(this.activeDate);
                     newDate.setDate(1);
                     this.focusDate(newDate, true);
                     break;
                 case 37: //left
                     e.preventDefault();
+                    e.stopPropagation();
                     this.focusDate(1, false);
                     break;
                 case 38: //up
                     e.preventDefault();
+                    e.stopPropagation();
                     this.focusDate(7, false);
                     break;
                 case 39: //right
                     e.preventDefault();
+                    e.stopPropagation();
                     this.focusDate(1, true);
                     break;
                 case 40: //down
                     e.preventDefault();
+                    e.stopPropagation();
                     this.focusDate(7, true);
                     break;
                 case 9: //tab
                     if ($(e.target).hasClass('hw_lastActive')){
                         e.preventDefault();
+                        e.stopPropagation();
                         this.close();
                         this.trigger.focus();
                     }
@@ -519,17 +527,28 @@ var DatePicker = function(configs) {
         monthChange: function(date) {
             this.currentPicker.find('.hw_week').remove();
             this.currentPicker.find('.hw_pickerBody').append(this.renderWeeks(date));
+
+            var currentMonthYear = this.displayMonthYear(date);
             this.currentPicker.find('.hw_currentMonth')
-                .html(this.i18n.monthName[date.getMonth()] + ' ' + date.getFullYear());
+                .attr('aria-label', currentMonthYear)
+                .html(currentMonthYear);
+
             var prevMonthDate = this.getPrevMonthDate(date),
                 nextMonthDate = this.getNextMonthDate(date);
 
             this.currentPicker.find('.hw_monthLeft')
                 .trigger('redraw', this.minDate && (prevMonthDate <= this.minDate && prevMonthDate <= this.selectedDate))
-                .attr('data-date', prevMonthDate.getTime());
+                .attr({
+                    'data-date': prevMonthDate.getTime(),
+                    'aria-label': this.displayMonthYear(prevMonthDate)
+                });
+
             this.currentPicker.find('.hw_monthRight')
                 .trigger('redraw', this.maxDate && (nextMonthDate >= this.maxDate && nextMonthDate >= this.selectedDate))
-                .attr('data-date', nextMonthDate.getTime());
+                .attr({
+                    'data-date': nextMonthDate.getTime(),
+                    'aria-label': this.displayMonthYear(nextMonthDate)
+                });
 
             this.activeDate = date;
         },
