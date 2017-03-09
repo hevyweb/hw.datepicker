@@ -188,7 +188,14 @@ Default:
     'nextMonth': 'Next month',
     'monthName': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     'weekNameFull': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    'weekNameShort': ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
+    'weekNameShort': ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+    'currentDate': 'Current date',
+    'selectedDate': 'Selected date',
+    'currentMonth': 'Current month',
+    'lastAvailableDate': 'Last available date',
+    'firstAvailableDate': 'First available date',
+    'notAvailable': 'Date is not available',
+    'description': 'datepicker'
 }
 ```
 
