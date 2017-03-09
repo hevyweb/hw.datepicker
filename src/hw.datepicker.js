@@ -109,7 +109,8 @@ var DatePicker = function(configs) {
             'currentMonth': 'Current month',
             'lastAvailableDate': 'Last available date',
             'firstAvailableDate': 'First available date',
-            'notAvailable': 'Date is not available'
+            'notAvailable': 'Date is not available',
+            'description': 'datepicker'
         }, configs.i18n || {}),
         init: function() {
             var self = this;
@@ -150,7 +151,13 @@ var DatePicker = function(configs) {
             }
         },
         render: function() {
-            this.currentPicker = $('<div class="hw_datepicker hw_closed" aria-hidden="true" tabindex="0" role="application" />')
+            this.currentPicker = $('<div />').attr({
+                'class': 'hw_datepicker hw_closed',
+                'aria-hidden': 'true',
+                'tabindex': '0',
+                'role': 'application',
+                'aria-label': this.i18n.description
+            })
                 .click(function(e) {
                     e.stopPropagation();
                 })
@@ -291,12 +298,11 @@ var DatePicker = function(configs) {
 
             var currentMonth = this.displayMonthYear(date);
 
-            return $('<div class="hw_monthContainer" role="navigation" />')
+            return $('<div class="hw_monthContainer" />')
                     .append(prevButton)
                     .append(
                         $('<div class="hw_currentMonth" />')
                         .attr({
-                            'role': 'status',
                             'tabindex': '0',
                             'aria-label': currentMonth,
                             'title': this.i18n.currentMonth
