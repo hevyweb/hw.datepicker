@@ -43,5 +43,12 @@ var DatePickerI18n = {
         'Пт',
         'Сб',
         'Нд'
-    ]
+    ],
+    'currentDate': 'Поточна дата',
+    'selectedDate': 'Обрана дата',
+    'currentMonth': 'Поточний місяць',
+    'lastAvailableDate': 'Остання доступна дата',
+    'firstAvailableDate': 'Перша доступна дата',
+    'notAvailable': 'Дата  недоступна',
+    'description': 'Календар'
 };
