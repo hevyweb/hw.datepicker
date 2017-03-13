@@ -1,0 +1,295 @@
+* {
+    padding: 0;
+    margin: 0
+}
+body {
+    font-family: 'Rokkitt', serif;
+    font-size: 17px;
+    background: #e7e2cf;
+    color: #858175
+}
+img {
+    border: none
+}
+h1 {
+    font-family: 'Lobster Two', cursive;
+    font-size: 24px;
+    color: #446396;
+    font-weight: 400
+}
+h2 {
+    font-family: 'Rokkitt', serif;
+    font-size: 21px;
+    color: #d65a3d;
+    font-weight: 400
+}
+a {
+    text-decoration: none;
+    color: #385074
+}
+a:hover {
+    color: #b34a30
+}
+pre {
+    background: #B64C32;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6) inset;
+    border-radius: 5px;
+    word-break: break-all;
+    overflow: hidden
+}
+iframe {
+    border: 0;
+    padding: 0;
+    margin: 0
+}
+input {
+    border: 1px solid grey;
+    border-radius: 5px 0 0 5px;
+    color: #858175;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px
+}
+p>button {
+    border: 1px solid grey;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    height: 32px;
+    margin: 0;
+    padding: 0 5px
+}
+p>input,
+p>button {
+    float: left
+}
+.clear {
+    clear: both
+}
+.floatLeft {
+    float: left
+}
+.marRight40 {
+    margin-right: 40px
+}
+.marRight30 {
+    margin-right: 30px
+}
+.marTop {
+    margin-top: 30px
+}
+.bg-bottom-none {
+    background: none bottom!important
+}
+.page-wrap {
+    max-width: 960px;
+    overflow: hidden;
+    margin: 0 auto
+}
+.page {
+    width: 960px;
+    overflow: hidden;
+    margin: 0 auto
+}
+.wrap {
+    overflow: hidden
+}
+.box {
+    width: 460px;
+    float: left;
+    margin: 0 10px 40px;
+}
+
+.left{
+    float:left;
+    width: 50%;
+}
+
+.button {
+    background: #3B547B;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+    line-height: 30px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.button:hover {
+    background: #B64C32
+}
+.button::after {
+    border-color: transparent #d4cebe transparent transparent;
+    border-style: solid;
+    border-width: 15px;
+    content: " ";
+    display: block;
+    float: right;
+    height: 0;
+    width: 0;
+}
+.button a {
+    line-height: 30px;
+    color: #fff;
+    text-decoration: none
+}
+.button a:hover {
+    color: #fff
+}
+.header-wrap {
+    max-width: 960px;
+    margin: 0 auto 50px
+}
+.logo {
+    margin: 0 auto;
+    max-width: 400px;
+    margin-top: 40px;
+    margin-bottom: 40px
+}
+.logo h1 {
+    font-size: 54px;
+    color: #446396;
+    text-align: center
+}
+.panel {
+    overflow: hidden;
+    background: #D4CEBE;
+    padding: 30px
+}
+.title {
+    margin-bottom: 20px;
+    margin-top: 15px
+}
+.content p {
+    padding-bottom: 10px
+}
+.content img {
+    margin-right: 30px;
+    float: left;
+    border: 12px solid #fff;
+}
+.copyright-wrap {
+    overflow: hidden
+}
+.copyright {
+    max-width: 960px;
+    margin: 0 auto;
+    padding-top: 40px;
+    padding-bottom: 20px
+}
+.copyright .content p {
+    color: #b94d32;
+    font-size: 17px
+}
+.copyright .content p a.link {
+    text-decoration: none;
+    color: #b94d32
+}
+.copyright .content p a.link:hover {
+    color: #385074
+}
+.example::after {
+    content: ' ';
+    clear: both;
+    display: block
+}
+.code {
+    height: 0;
+    overflow: hidden
+}
+table {
+    border-collapse: collapse
+}
+td,
+th {
+    border: 2px solid #eee;
+    padding: 5px
+}
+
+.cellphone{
+    background: URL('./cellphone.png') no-repeat;
+    height: 600px;
+    position: relative;
+    width: 295px;
+}
+
+.cellphoneBody{
+    background: #fff none repeat scroll 0 0;
+    height: 439px;
+    left: 21px;
+    overflow: hidden;
+    position: absolute;
+    top: 87px;
+    width: 253px;
+}
+
+@media screen and (max-width: 480px) {
+    *{
+        box-sizing: border-box;
+    }
+    
+    h1{
+        font-size: 1.1em;
+        margin-bottom: .2em;
+    }
+    
+    h2{
+        font-size: 1.1rem;
+    }
+    
+    .panel{
+        padding: 1em;
+    }
+    .header-wrap{
+        margin: 0;
+    }
+    .page-wrap{
+        padding: 0 1em;
+    }
+    .logo {
+        margin: 0;
+    }
+    
+    .logo h1 {
+        font-size: 1.5em;
+        margin: 1em 0;
+    }
+    
+    .box {
+        width: 100%;
+        float: none;
+        margin: 0 0 2.2rem 0;
+    }
+    
+    .title{
+        margin-top: 0;
+    }
+    input{
+        width: 7.65em;
+        height: 2.2em;
+        line-height: 2.3em;
+    }
+    p > button {
+        height: 2.2em;
+    }
+    
+    .copyright-wrap {
+        padding: 0 1.2em;
+    }
+    
+    .copyright .content p {
+        font-size: 0.75em;
+    }
+    
+    .copyright {
+        padding-top: 1em;
+    }
+    
+    .left{
+        float: none;
+        width: 100%;
+    }
+}

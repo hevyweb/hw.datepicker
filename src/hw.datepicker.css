@@ -9,26 +9,26 @@
  */
 
 .hw_datepicker{
-    border: 1px solid silver;
-    border-radius: 5px;
-    padding: 5px;
-    position: absolute;
+    font-size: 10px;
     font-family: Verdana;
-    font-size: 12px;
+    border: .1rem solid silver;
+    border-radius: .5em;
+    padding: .5em;
+    position: absolute;
     color: #005C9D;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 .3em .5em rgba(0, 0, 0, 0.5);
     background: #F5F5F5;
-    width: 256px;
+    width: 25.6em;
 }
 
 .hw_datepicker button{
     background: white;
-    border: 1px solid #005C9D;
-    border-radius: 2px;
-    margin: 2px;
+    border: .1em solid #005C9D;
+    border-radius: .2em;
+    margin: .2em;
     padding: 0;
-    width: 32px;
-    height: 32px;
+    width: 2.21em;
+    height: 2.21em;
     text-align: center;
     vertical-align: middle;        
     cursor: pointer;
@@ -38,7 +38,7 @@
     display: none;
 }
 .hw_datepicker button.hw_unavailable {
-    border: 1px solid silver;
+    border: .1em solid silver;
     color: silver;
     cursor: initial;
     background: white
@@ -47,12 +47,12 @@
 .hw_datepicker button.hw_currentDate{
     font-weight: bold;
     color: #ED3125;
-    border: 1px solid #ED3125;
+    border: .1em solid #ED3125;
 }
 
 .hw_datepicker button.hw_selectedDate{
     background: #62a4b4;
-    border: 1px solid #62a4b4;
+    border: .1em solid #62a4b4;
     color: #fff;
     text-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
     font-weight: bold;
@@ -60,7 +60,7 @@
 
 .hw_datepicker button.hw_activeDay{
     background: #005C9D;
-    border: 1px solid #005C9D;
+    border: .1em solid #005C9D;
     color: white;
 }
 
@@ -93,7 +93,8 @@
     display: table-cell;
     font-weight: bold;
     text-align: center;
-    line-height: 24px;
+    line-height: 2.4em;
+    font-size: 1.2em;
 }
 
 .hw_week{
@@ -107,6 +108,7 @@
 .hw_currentMonth{
     width: 100%;
     text-align: center;
+    font-size: 1.4em;
 }
 
 .hw_closed{
