@@ -163,13 +163,13 @@ var DatePicker = function(configs) {
                 })
                 .keydown($.proxy(this.keyboardNavigation, this));
 
-            this.adjustPosition();
-
             this.renderMonthNavigation(this.activeDate)
                 .appendTo(this.currentPicker);
 
             this.renderBody()
                 .appendTo(this.currentPicker);
+
+            this.adjustPosition();
 
             return this.currentPicker;
         },
@@ -273,10 +273,25 @@ var DatePicker = function(configs) {
         },
         adjustPosition: function() {
             var offset = this.input.offset();
+            var windowWidth = $(window).width();
+            var pickerWidth = this.currentPicker.outerWidth();
+            var left = offset.left;
+            var top = offset.top + this.input.outerHeight();
+            if (windowWidth > pickerWidth && left + pickerWidth > windowWidth){
+                var right = left + this.input.width();
+                if (right - pickerWidth < 0){                    
+                    left = parseInt((windowWidth - (left + pickerWidth))/2);
+                } else{
+                    left = right - pickerWidth;
+                }
+            } else {
+                left = 0;
+            }
+            
             this.currentPicker
                 .css({
-                    'left': offset.left,
-                    'top': offset.top + this.input.outerHeight()
+                    'left': left,
+                    'top': top
                 });
         },
         renderMonthNavigation: function(date) {

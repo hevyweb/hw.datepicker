@@ -114,3 +114,18 @@
 .hw_closed{
     display: none;
 }
+
+@media screen and (max-width: 256px) {
+    .hw_datepicker{
+        width: 100%;
+        left: 0;
+    }
+    
+    .hw_day {
+        border: .1em solid transparent;
+    }
+    
+    .hw_datepicker button{
+        width: 100%;
+    }
+}
