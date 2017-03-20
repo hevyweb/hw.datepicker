@@ -169,8 +169,6 @@ var DatePicker = function(configs) {
             this.renderBody()
                 .appendTo(this.currentPicker);
 
-            this.adjustPosition();
-
             return this.currentPicker;
         },
         keyboardNavigation: function(e) {
@@ -272,11 +270,11 @@ var DatePicker = function(configs) {
             this.currentPicker.find('button[data-date=' + newDate.getTime() + ']').focus();
         },
         adjustPosition: function() {
-            var offset = this.input.offset();
-            var windowWidth = $(window).width();
+            var $window = $(window);
+            var inputPosition = this.input.offset();
+            var windowWidth = $window.width();
             var pickerWidth = this.currentPicker.outerWidth();
-            var left = offset.left;
-            var top = offset.top + this.input.outerHeight();
+            var left = inputPosition.left;
             if (windowWidth > pickerWidth && left + pickerWidth > windowWidth){
                 var right = left + this.input.width();
                 if (right - pickerWidth < 0){                    
@@ -286,6 +284,17 @@ var DatePicker = function(configs) {
                 }
             } else {
                 left = 0;
+            }
+            
+            var top = inputPosition.top + this.input.outerHeight();
+            var windowHeight = $window.height();
+            var pickerHeight = this.currentPicker.outerHeight(true);
+            console.log(pickerHeight);
+            if (top + pickerHeight > windowHeight){
+                top = inputPosition.top - pickerHeight;
+                if (top < 0){
+                    top = 0;
+                }
             }
             
             this.currentPicker
@@ -581,6 +590,9 @@ var DatePicker = function(configs) {
             if (!this.currentPicker) {
                 $(container).append(this.render());
             }
+
+            this.adjustPosition();
+            
             $('body').click($.proxy(this.close, this));
             this.currentPicker.removeClass('hw_closed').removeAttr('aria-hidden').focus();
             this.getActive();
