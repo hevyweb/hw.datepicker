@@ -275,25 +275,36 @@ var DatePicker = function(configs) {
             var windowWidth = $window.width();
             var pickerWidth = this.currentPicker.outerWidth();
             var left = inputPosition.left;
-            if (windowWidth > pickerWidth && left + pickerWidth > windowWidth){
-                var right = left + this.input.width();
-                if (right - pickerWidth < 0){                    
-                    left = parseInt((windowWidth - (left + pickerWidth))/2);
-                } else{
-                    left = right - pickerWidth;
+            if (windowWidth > pickerWidth) {
+                if (left + pickerWidth > windowWidth) {
+                    var right = left + this.input.width();
+                    if (right - pickerWidth < 0){                    
+                        left = parseInt((windowWidth - (left + pickerWidth))/2);
+                    } else{
+                        left = right - pickerWidth;
+                    }
                 }
             } else {
                 left = 0;
             }
             
-            var top = inputPosition.top + this.input.outerHeight();
+            var inputHeight = this.input.outerHeight();
+            var top = inputPosition.top + inputHeight;
             var windowHeight = $window.height();
             var pickerHeight = this.currentPicker.outerHeight(true);
-            console.log(pickerHeight);
             if (top + pickerHeight > windowHeight){
-                top = inputPosition.top - pickerHeight;
-                if (top < 0){
-                    top = 0;
+                var bodyHeight = $("body").height();
+                if (top + pickerHeight < bodyHeight) {
+                    $window.scrollTop(inputPosition.top);
+                } else {
+                    top = inputPosition.top - pickerHeight;
+                    if (top < 0){
+                        top = 0;
+                    } else {
+                        if (top < $window.scrollTop()){
+                            $window.scrollTop(inputPosition - windowHeight + inputHeight);
+                        }
+                    }
                 }
             }
             
