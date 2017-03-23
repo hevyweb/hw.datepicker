@@ -333,7 +333,7 @@ var DatePicker = function(configs) {
                 "hw_monthRight"
             ).trigger("redraw", this.maxDate && nextMonthDate >= this.maxDate && nextMonthDate >= this.selectedDate),
 
-            currentMonth = this.displayMonthYear(date);
+            currentMonth = this.displayMonthYear(monthDate);
 
             return $("<div />")
                     .addClass("hw_monthContainer")
