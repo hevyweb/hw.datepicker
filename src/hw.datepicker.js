@@ -316,7 +316,7 @@ var DatePicker = function(configs) {
                 });
         },
         renderMonthNavigation: function(date) {
-            var date = new Date(date),
+            date = new Date(date),
                 prevMonthDate = this.getPrevMonthDate(date),
                 nextMonthDate = this.getNextMonthDate(date);
 
@@ -334,7 +334,8 @@ var DatePicker = function(configs) {
 
             var currentMonth = this.displayMonthYear(date);
 
-            return $('<div class="hw_monthContainer" />')
+            return $("<div />")
+                    .addClass("hw_monthContainer")
                     .append(prevButton)
                     .append(
                         $("<div />")
@@ -383,19 +384,27 @@ var DatePicker = function(configs) {
         },
         
         renderBody: function() {
-            return $('<div class="hw_pickerBody" />')
+            return $("<div />")
+                .addClass("hw_pickerBody")
                 .append(this.renderBodyHeader())
                 .append(this.renderWeeks(this.activeDate));
         },
         renderBodyHeader: function() {
-            var bodyHeader = $('<div class="hw_pickerBodyHeader" role="rowheader" />');
+            var bodyHeader = $("<div />").attr({
+                "class": "hw_pickerBodyHeader",
+                "role": "rowheader"
+            });
             var self = this;
             if (!this.startWithMonday) {
                 this.i18n.weekNameFull.unshift(this.i18n.weekNameFull.pop());
                 this.i18n.weekNameShort.unshift(this.i18n.weekNameShort.pop());
             }
             $.each(self.i18n.weekNameShort, function(key, day) {
-                $('<div title="' + self.i18n.weekNameFull[key] + '" role="columnheader">' + day + '</div>').appendTo(bodyHeader);
+                $("<div />").attr({
+                    "title": self.i18n.weekNameFull[key],
+                    "role": "columnheader"
+                }).html(day)
+                .appendTo(bodyHeader);
             });
 
             return bodyHeader;
@@ -503,10 +512,10 @@ var DatePicker = function(configs) {
                     self.selectDate(e);
                 })
                 .hover(
-                        function(e) {
+                        function() {
                             $(this).focus();
                         },
-                        function(e) {
+                        function() {
                             $(this).blur();
                         }
                 )
@@ -521,14 +530,14 @@ var DatePicker = function(configs) {
                     self.activeDate = activeDate;
                     $(this).addClass("hw_activeDay");
                 })
-                .blur(function(e) {
+                .blur(function() {
                     $(this).removeClass("hw_activeDay");
                 });
             } else {
                 button.prop("disabled");
             }
 
-            return $('<div class="hw_day" />').append(button);
+            return $("<div />").addClass("hw_day").append(button);
         },
 
         addFrontZeros: function(number) {
