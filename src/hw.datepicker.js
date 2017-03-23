@@ -316,23 +316,24 @@ var DatePicker = function(configs) {
                 });
         },
         renderMonthNavigation: function(date) {
-            date = new Date(date),
-                prevMonthDate = this.getPrevMonthDate(date),
-                nextMonthDate = this.getNextMonthDate(date);
+            var 
+            monthDate = new Date(date),
+            prevMonthDate = this.getPrevMonthDate(monthDate),
+            nextMonthDate = this.getNextMonthDate(monthDate),
 
-            var prevButton = this.renderMonthNavBtn(
+            prevButton = this.renderMonthNavBtn(
                 this.i18n.prevMonth,
                 prevMonthDate,
                 "hw_monthLeft"
-            ).trigger("redraw", this.minDate && prevMonthDate <= this.minDate && prevMonthDate <= this.selectedDate);
+            ).trigger("redraw", this.minDate && prevMonthDate <= this.minDate && prevMonthDate <= this.selectedDate),
 
-            var nextButton = this.renderMonthNavBtn(
+            nextButton = this.renderMonthNavBtn(
                 this.i18n.nextMonth,
                 nextMonthDate,
                 "hw_monthRight"
-            ).trigger("redraw", this.maxDate && nextMonthDate >= this.maxDate && nextMonthDate >= this.selectedDate);
+            ).trigger("redraw", this.maxDate && nextMonthDate >= this.maxDate && nextMonthDate >= this.selectedDate),
 
-            var currentMonth = this.displayMonthYear(date);
+            currentMonth = this.displayMonthYear(date);
 
             return $("<div />")
                     .addClass("hw_monthContainer")
