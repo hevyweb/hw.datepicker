@@ -3,6 +3,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Hevyweb Datepicker</title>
+    <meta property="og:url"                content="https://hevyweb.github.io/hw.datepicker/demo/index.html" />
+    <meta property="og:type"               content="article" />
+    <meta property="og:title"              content="Customizable datepicker - a jQuery library" />
+    <meta property="og:description"        content="Hw.datepicker - it is a jQuery library, which generates nice customizable calendar. It is easy to use. It allows to pick a date using mouse or keyboard. Datepicker allows to configure available date range, you can use your own date format. It support different languages. You can extend the functionality of the datepicker without changing the source code. It userfriendly for mobile devices." />
+    <meta property="og:image"              content="https://hevyweb.github.io/hw.datepicker/demo/demo.png" />
+    <meta property="fb:app_id"             content="205768632814988" />
+    
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--  -->
     <!-- template -->
     <link href="style.css" rel="stylesheet" type="text/css" />
     <link href='https://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'>
@@ -16,6 +25,14 @@
     <!-- demo -->
     <script type="text/javascript">
         $(document).ready(function(){
+            (function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=205768632814988";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+            
             var datePicker1 = new DatePicker({
                 input: $('#hw_example_input1'),
                 trigger: $('#hw_example_button1')
@@ -129,6 +146,20 @@
     <div class="header-wrap">
         <div class="logo">
             <h1>Hevyweb datepicker</h1>
+        </div>
+    </div>
+    <div class="redRibbonContainer">
+        <div class="redRibbon"><div class="ribbonSeam">
+            <div class="fb-share-button" data-href="https://hevyweb.github.io/hw.datepicker/demo/index.html" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhevyweb.github.io%2Fhw.datepicker%2Fdemo%2Findex.html&amp;src=sdkpreparse">Share</a></div>
+
+            <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+            <script type="IN/Share" data-url="https://hevyweb.github.io/hw.datepicker/demo/index.html" data-counter="right"></script>
+
+            <a aria-label="Star hevyweb/hw.datepicker on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/hevyweb/hw.datepicker#stargazers_count" data-count-href="/hevyweb/hw.datepicker/stargazers" href="https://github.com/hevyweb/hw.datepicker" class="github-button">Star</a>
+             
+            </div>
+            <div class="ribbonLeft"><div class="ribbonSeam"></div></div>
+            <div class="ribbonRight"><div class="ribbonSeam"></div></div>
         </div>
     </div>
     <div class="page-wrap">
@@ -249,6 +280,7 @@ datePicker.init();
                   <h1>Multi language support</h1>
                   <h2>add your own language</h2>
                 </div>
+                <div class="clear"></div>
                 <div class="content">
                     <p class="example">
                         <input type="text" id="hw_example_input6" />
@@ -314,7 +346,6 @@ datePicker.init();
                         <div class="button">Code</div>
                     </div>
                 </div>
-                <div class="clear"></div>
             </div>
         </div>
         
@@ -410,105 +441,107 @@ datePicker.init();
         </div>
     </div>
 <div class="panel">
-    <div class="title">
-        <h1>A few words from author</h1>
-        <h2></h2>
-    </div>
-    <div class="content"> <img src="https://pp.vk.me/c604729/v604729156/28f48/WEos5URY8hE.jpg" alt="" />
-        <p>I had a task to add nice datepicker, which has all basic needs and a little bit more. I checked a lot of them, but each one had some issue. The best of those I saw, was a jQuery UI datepicker, but I don't like that it's too big.</p>
-        <p>History:</p>
-        <b>1.0.0</b>
-        <ul>
-            <li>Pick dates using mouse.</li>
-            <li>You can type the date manually. Datepicker highlights it in the calendar.</li>
-            <li>You can change dates using navigation buttons.</li>
-            <li>It support different date formats.</li>
-            <li>Allows to add you own events for the datepicker.</li>
-            <li>It can start the week with Monday.</li>
-            <li>You can use your own language.</li>
-        </ul>
-        <br />
-        <b>1.1.0</b>
-        <ul>
-            <li>Added keyboard navigation
+    <div class="footer-wrap">
+        <div class="title">
+            <h1>A few words from author</h1>
+            <h2></h2>
+        </div>
+        <div class="content"> <img src="https://pp.vk.me/c604729/v604729156/28f48/WEos5URY8hE.jpg" alt="" />
+            <p>I had a task to add nice datepicker, which has all basic needs and a little bit more. I checked a lot of them, but each one had some issues. The best of those I saw, was a jQuery UI datepicker, but I don't like that it's too big and does not support keyboard navigation out of the box.</p>
+            <p>History:</p>
+            <b>1.0.0</b>
+            <ul>
+                <li>Pick dates using mouse.</li>
+                <li>You can type the date manually. Datepicker highlights it in the calendar.</li>
+                <li>You can change dates using navigation buttons.</li>
+                <li>It support different date formats.</li>
+                <li>Allows to add you own events for the datepicker.</li>
+                <li>It can start the week with Monday.</li>
+                <li>You can use your own language.</li>
+            </ul>
+            <br />
+            <b>1.1.0</b>
+            <ul>
+                <li>Added keyboard navigation
+                <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Arrow left</td>
+                        <td>next date</td>
+                    </tr>
+                    <tr>
+                        <td>Arrow right</td>
+                        <td>previous date</td>
+                    </tr>
+                    <tr>
+                        <td>Arrow up</td>
+                        <td>1 week back</td>
+                    </tr>
+                    <tr>
+                        <td>Arrow down</td>
+                        <td>1 week ahead</td>
+                    </tr>
+                    <tr>
+                        <td>Home</td>
+                        <td>first day of the month</td>
+                    </tr>
+                    <tr>
+                        <td>End</td>
+                        <td>last day of the month</td>
+                    </tr>
+                    <tr>
+                        <td>Page up</td>
+                        <td>1 month back</td>
+                    </tr>
+                    <tr>
+                        <td>Page down</td>
+                        <td>1 month ahead</td>
+                    </tr>
+                    <tr>
+                        <td>Enter</td>
+                        <td>select current date</td>
+                    </tr>
+                    <tr>
+                        <td>Space</td>
+                        <td>select current date</td>
+                    </tr>
+                    <tr>
+                        <td>Esc</td>
+                        <td>close the datepicker</td>
+                    </tr>
+                    <tr>
+                        <td>Tab</td>
+                        <td>next date until the end of the current month</td>
+                    </tr>
+                    <tr>
+                        <td>Shift+Tab</td>
+                        <td>previous date until the very first day of the month and to the buttons, which change month</td>
+                    </tr>
+                </tbody>
+            </table>
+                </li>
+                <li>Added new event <b>onDateFocus</b></li>
+            </ul>
             <br>
-        <table>
-            <thead>
-                <tr>
-                    <th>Key</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Arrow left</td>
-                    <td>next date</td>
-                </tr>
-                <tr>
-                    <td>Arrow right</td>
-                    <td>previous date</td>
-                </tr>
-                <tr>
-                    <td>Arrow up</td>
-                    <td>1 week back</td>
-                </tr>
-                <tr>
-                    <td>Arrow down</td>
-                    <td>1 week ahead</td>
-                </tr>
-                <tr>
-                    <td>Home</td>
-                    <td>first day of the month</td>
-                </tr>
-                <tr>
-                    <td>End</td>
-                    <td>last day of the month</td>
-                </tr>
-                <tr>
-                    <td>Page up</td>
-                    <td>1 month back</td>
-                </tr>
-                <tr>
-                    <td>Page down</td>
-                    <td>1 month ahead</td>
-                </tr>
-                <tr>
-                    <td>Enter</td>
-                    <td>select current date</td>
-                </tr>
-                <tr>
-                    <td>Space</td>
-                    <td>select current date</td>
-                </tr>
-                <tr>
-                    <td>Esc</td>
-                    <td>close the datepicker</td>
-                </tr>
-                <tr>
-                    <td>Tab</td>
-                    <td>next date until the end of the current month</td>
-                </tr>
-                <tr>
-                    <td>Shift+Tab</td>
-                    <td>previous date until the very first day of the month and to the buttons, which change month</td>
-                </tr>
-            </tbody>
-        </table>
-            </li>
-            <li>Added new event <b>onDateFocus</b></li>
-        </ul>
-        <br>
-        <b>1.2.0</b>
-        <ul>
-            <li>Ability to be read by screen readers: NVDA and chromevox</li>
-        </ul>
-        <br>
-        <p><b>In the future I plan to extend the functionality with additional features:</b></p>
-        <ul>
-            <li>Full responsive support</li>
-            <li>Add composer file and update the config file for npm</li>
-            <li>Add method "desctroy"</li>
-        </ul>
+            <b>1.2.0</b>
+            <ul>
+                <li>Ability to be read by screen readers: NVDA and chromevox</li>
+            </ul>
+            <br>
+            <p><b>In the future I plan to extend the functionality with additional features:</b></p>
+            <ul>
+                <li>Full responsive support</li>
+                <li>Add composer file and update the config file for npm</li>
+                <li>Add method "desctroy"</li>
+            </ul>
+        </div>
     </div>
 </div>
 
