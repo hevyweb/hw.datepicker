@@ -3,6 +3,15 @@
 
 > A jQuery datepicker library
 
+## Menu
+
+1. [Usage](#usage)
+1. [Required options](#required-options)
+1. [Other options](#other-options)
+1. [Keyboard navigation](#keyboard-navigation)
+1. [Responsive design](#responsive-design)
+1. [Demo page](#demo-page)
+
 ## Usage
 
 * Include datepicker StyleSheet
@@ -218,6 +227,12 @@ Datepicker supports keyboard navigation
 |Esc         |close the datepicker|
 |Tab         |next date until the end of the current month|
 |Shift+Tab   |previous date until the very first day of the month and to the buttons, which change month|
+
+---
+## Responsive design
+By default calendar appears under the input field. If there is not enough space, but the page can be scrolled down, it would be scrolled. Otherwise, calendar appears above the input field.
+Datepicker also adjusts its position horizontally. By default left border of calendar is on the same line as left border of input field. If the screen is too small, calendar shrinks and  takes full width. 
+
 
 ## Demo page
 [https://hevyweb.github.io/hw.datepicker](https://hevyweb.github.io/hw.datepicker/index.html)
