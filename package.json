@@ -9,10 +9,11 @@
   },
   "keywords": [
     "datepicker",
-    "application",
+    "javascript",
     "jquery",
-    "hevyweb",
-    "select date"
+    "library",
+    "select date",
+    "calendar"
   ],
   "author": "Dmytro Dzyuba <1932@bk.ru> (https://github.com/hevyweb)",
   "license": "MIT",
