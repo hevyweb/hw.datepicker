@@ -9,8 +9,7 @@
         "select date",
         "calendar"
     ],
-    "homepage": "http://github.com/hevyweb/hw.datepicker",
-    "type": "library",
+    "homepage": "https://hevyweb.github.io/hw.datepicker/",
     "license": "MIT",
     "authors": [
         {
@@ -18,5 +17,11 @@
             "email": "1932@bk.ru",
             "homepage": "https://hevyweb.github.io/hw.datepicker/"
         }
-    ]
+    ],
+    "support": {
+        "email": "1932@bk.ru",
+        "issues": "https://github.com/hevyweb/hw.datepicker/issues",
+        "source": "https://github.com/hevyweb/hw.datepicker",
+        "docs": "https://github.com/hevyweb/hw.datepicker#hwdatepicker"
+    }
 }
