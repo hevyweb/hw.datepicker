@@ -2,7 +2,7 @@
   "name": "hw.datepicker",
   "title": "Datepicker",
   "description": "A jQuery datepicker library",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hevyweb/hw.datepicker.git"
@@ -14,6 +14,7 @@
     "library",
     "select date",
     "calendar"
+    "jquery plugin"
   ],
   "author": "Dmytro Dzyuba <1932@bk.ru> (https://github.com/hevyweb)",
   "license": "MIT",
