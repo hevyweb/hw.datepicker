@@ -116,12 +116,7 @@ var DatePicker = function(configs) {
         init: function() {
             var self = this;
 
-            this.trigger.click(function(e) {
-                if (self.currentPicker == null || self.currentPicker.hasClass("hw_closed")) {
-                    e.stopPropagation();
-                    self.open();
-                }
-            });
+            this.trigger.on('click.hw.datepicker.trigger', this.triggerClickEvent.bind(this));
 
             var selectedDate = this.strToDate(this.input.val());
 
@@ -129,20 +124,9 @@ var DatePicker = function(configs) {
                 this.changeDate(selectedDate);
             }
 
-            this.input.keyup(function() {
-                var date = self.strToDate($(this).val());
-                if (date != null && !isNaN(date.getTime())) {
-                    if ((self.minDate == null || self.minDate <= date) && (self.maxDate == null || self.maxDate >= date)) {
-                        self.changeDate(date);
-                    }
-                }
-            });
+            this.input.on("keyup.hw.datepicker.input", this.inputKeydownEvent.bind(this));
 
-            $(window).resize(function() {
-                if (self.currentPicker != null) {
-                    self.adjustPosition();
-                }
-            });
+            $(window).on("resize.hw.datepicker.window", this.windowResizeEvent.bind(this));
         },
         changeDate: function(newDate) {
             this.selectedDate = newDate;
@@ -162,7 +146,7 @@ var DatePicker = function(configs) {
                 .click(function(e) {
                     e.stopPropagation();
                 })
-                .keydown($.proxy(this.keyboardNavigation, this));
+                .keydown(this.keyboardNavigation.bind(this));
 
             this.renderMonthNavigation(this.activeDate)
                 .appendTo(this.currentPicker);
@@ -375,7 +359,7 @@ var DatePicker = function(configs) {
                     $(this).removeClass("hw_unavailable").attr({
                         "aria-disabled": "false",
                         "tabindex": 0
-                    }).off("click").on("click", $.proxy(self.monthBtnClick, self));
+                    }).off("click").on("click", self.monthBtnClick.bind(self));
                 }
             });
         },
@@ -629,7 +613,7 @@ var DatePicker = function(configs) {
 
             this.adjustPosition();
             
-            $("body").click($.proxy(this.close, this));
+            $("body").on("click.hw.datepicker.body", this.close.bind(this));
             this.currentPicker.removeClass("hw_closed").removeAttr("aria-hidden").focus();
             this.getActive();
         },
@@ -687,6 +671,44 @@ var DatePicker = function(configs) {
                 return date;
             }
             return null;
+        },
+        
+        triggerClickEvent: function(e) {
+    
+            if (this.currentPicker == null || this.currentPicker.hasClass("hw_closed")) {
+                e.stopPropagation();
+                this.open();
+            }
+        },
+        
+        inputKeydownEvent: function (e) {
+            var date = this.strToDate(this.input.val());
+            if (date != null && !isNaN(date.getTime())) {
+                if ((this.minDate == null || self.minDate <= date) && (self.maxDate == null || self.maxDate >= date)) {
+                    this.changeDate(date);
+                }
+            }
+        },
+        
+        windowResizeEvent: function() {
+            if (self.currentPicker != null) {
+                self.adjustPosition();
+            }
+        },
+        
+        destroy: function(){
+            if (this.events.onDestroy) {
+                this.events.onDestroy.call(this, e);
+            }
+            $(window).off("resize.hw.datepicker.window");
+            $("body").off("click.hw.datepicker.body");
+            this.input.off("keyup.hw.datepicker.input");
+            this.trigger.off("click.hw.datepicker.trigger");
+            if(this.currentPicker){
+                this.currentPicker.remove();
+                this.currentPicker = null;
+            }
+            
         }
     };
 };
