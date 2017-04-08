@@ -100,6 +100,7 @@ datePicker.init();
                         <li><b>onMonthChange</b> - event is fired when user changes month. It accepts 2 parameters: Date object and initial jQuery click event.</li>
                         <li><b>onClose</b> - event is fired when datepicker disappears. It accepts 1 parameter - initial jQuery click event.</li>
                         <li><b>onDateFocus</b> - event is fired when you focus any date. It accepts 2 parameter - initial jQuery click event and the date, which is focused.</li>
+                        <li><b>onDestroy</b> - event is fired before you destroy the datepicker.</li>
                     </ul>
                     <div class="code">
                         <pre>
@@ -330,9 +331,16 @@ datePicker.init();
 <div class="panel">
     <div class="footer-wrap">
         <h2 class="title">A few words from author</h2>
-        <div class="content"> <img src="https://pp.vk.me/c604729/v604729156/28f48/WEos5URY8hE.jpg" alt="" />
+        <div class="content"><img src="https://pp.vk.me/c604729/v604729156/28f48/WEos5URY8hE.jpg" alt="" />
             <p>I had a task to add nice datepicker, which has all basic needs and a little bit more. I checked a lot of them, but each one had some issues. The best of those I saw, was a jQuery UI datepicker, but I don't like that it's too big and does not support keyboard navigation out of the box.</p>
             <h2>History:</h2>
+            <h3>1.3.0</h3>
+            <ul>
+                <li>Added composer file</li>
+                <li>Added new method "destroy" which removes datepicker functionality.</li>
+                <li>Added new event <b>onDestroy</b></li>
+            </ul>
+            <br>
             <h3>1.2.1</h3>
             <ul>
                 <li>Full responsive support</li>

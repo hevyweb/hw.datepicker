@@ -5,7 +5,7 @@
  * @link https://github.com/hevyweb/hw.datepicker
  * @author Dmytro Dzyuba <1932@bk.ru>
  * @licence MIT
- * @version 1.2.1
+ * @version 1.3.0
  */
 
 var DatePicker = function(configs) {
@@ -623,7 +623,7 @@ var DatePicker = function(configs) {
                 this.events.onClose.call(this, e);
             }
             this.currentPicker.addClass("hw_closed").attr("aria-hidden", "true");
-            $("body").off("click", this.close);
+            $("body").off("click.hw.datepicker.body", this.close);
             this.input.focus();
         },
         

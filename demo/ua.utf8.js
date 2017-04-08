@@ -6,7 +6,7 @@
  * @link https://github.com/hevyweb/hw.datepicker
  * @author Dmytro Dzyuba <1932@bk.ru>
  * @licence MIT
- * @version 1.2.1
+ * @version 1.3.0
  */
 
 var DatePickerI18n = {

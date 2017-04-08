@@ -208,7 +208,7 @@ table {
 }
 td,
 th {
-    border: .2em solid #eee;
+    border: .1em solid #eee;
     padding: .5em;        
 }
 
@@ -280,13 +280,13 @@ th {
 }
 
 .ribbonRight::after{
-    border-bottom: 22px solid transparent;
+    border-bottom: 20px solid transparent;
     border-right: 22px solid #e7e2cf;
-    border-top: 22px solid transparent;
+    border-top: 20px solid transparent;
     content: " ";
     height: 0;
     position: absolute;
-    right: 0;
+    right: -1px;
     top: 0;
     width: 0;
     z-index: 2;
@@ -319,9 +319,9 @@ th {
 }
 
 .ribbonLeft::before{
-    border-bottom: 22px solid transparent;
+    border-bottom: 20px solid transparent;
     border-left: 22px solid #e7e2cf;
-    border-top: 22px solid transparent;
+    border-top: 20px solid transparent;
     content: " ";
     height: 0;
     left: 0;

@@ -160,6 +160,7 @@ Default: `[]`
 |onMonthChange |This event fires when user changes month. It accepts 2 parameters: Date object and initial jQuery click event. |
 |onClose       |This event fires when datepicker disappears. It accepts 1 parameter - initial jQuery click event.|
 |onDateFocus   |This event fires when you focus any date. It accepts 2 parameter - initial jQuery click event and the date, which is focused.|
+|onDestroy     |This event fires in the "destroy" method before the destruction.|
 
 ```javascript
 var datePicker = new DatePicker({
@@ -180,6 +181,9 @@ var datePicker = new DatePicker({
         },
         onDateFocus: function(){
             alert('Date focused.');
+        },
+        onDestroy: function(){
+            alert('Datepicker does not exist anymore.');
         }
     }
 });
@@ -235,7 +239,7 @@ Datepicker also adjusts its position horizontally. By default left border of cal
 
 
 ## Demo page
-[https://hevyweb.github.io/hw.datepicker](https://hevyweb.github.io/hw.datepicker/index.html)
+[https://hevyweb.github.io/hw.datepicker/demo](https://hevyweb.github.io/hw.datepicker/demo/index.html)
 
 ### Author
 **Dmytro Dzyuba**
