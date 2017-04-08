@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Hevyweb Datepicker</title>
+    <title>Hevyweb Datepicker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+    <meta name="keywords" content="datepicker, javascript, jquery, library, select date, calendar, jquery plugin"> 
+    <meta name="description" content="Hw.datepicker - it is a jQuery library, which generates nice customizable calendar. It is easy to use. It allows to pick a date using mouse or keyboard. Datepicker allows to configure available date range, you can use your own date format. It support different languages. You can extend the functionality of the datepicker without changing the source code. It userfriendly for mobile devices." />
+    <meta name="author" content="Dmytro Dzyuba" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
     <meta property="og:url"                content="https://hevyweb.github.io/hw.datepicker/demo/index.html" />
     <meta property="og:type"               content="article" />
     <meta property="og:title"              content="Customizable datepicker - a jQuery library" />
@@ -11,136 +16,20 @@
     <meta property="fb:app_id"             content="205768632814988" />
     
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!--  -->
-    <!-- template -->
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-1.11.3.js" type="text/javascript"></script>
+    
     <link href='https://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
-    <!-- dependency -->
-    <script src="https://code.jquery.com/jquery-1.11.3.js" type="text/javascript"></script>
+
+    <!-- demo -->
+    <script src="./demo.js" type="text/javascript"></script>
+    <link href="./style.css" rel="stylesheet" type="text/css" />
+    
     <!-- Hevyweb datepicker -->
     <link href="../src/hw.datepicker.css" rel="stylesheet" type="text/css" />
     <script src="./ua.utf8.js" type="text/javascript"></script>
     <script src="../src/hw.datepicker.js" type="text/javascript"></script>
-    <!-- demo -->
-    <script type="text/javascript">
-        $(document).ready(function(){
-            (function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=205768632814988";
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-            
-            var datePicker1 = new DatePicker({
-                input: $('#hw_example_input1'),
-                trigger: $('#hw_example_button1')
-            });
-            datePicker1.init();
-
-            var minDate = new Date();
-            minDate.setDate(minDate.getDate() - 60);
-
-            var maxDate = new Date();
-            maxDate.setDate(maxDate.getDate() + 1);
-
-            var selectedDate = new Date();
-            selectedDate.setDate(selectedDate.getDate() - 90);
-
-            var date = datePicker1.i18n.monthName[minDate.getMonth()].substring(0,3) + ' ' + minDate.getDate() + ', ' + minDate.getFullYear() + ' - ' +
-                    datePicker1.i18n.monthName[maxDate.getMonth()].substring(0,3) + ' ' + maxDate.getDate() + ', ' + maxDate.getFullYear();
-
-            $('#daterange').append($('<span />').html(date));
-
-            var inputDate = 
-                datePicker1.addFrontZeros(selectedDate.getDate()) + '.' + 
-                datePicker1.addFrontZeros(selectedDate.getMonth()+1) + '.' + 
-                selectedDate.getFullYear();
-        
-            $('#hw_example_input2').val(inputDate);
-
-            var datePicker2 = new DatePicker({
-                input: $('#hw_example_input2'),
-                trigger: $('#hw_example_button2'),
-                minDate: minDate,
-                maxDate: maxDate
-                });
-            datePicker2.init();
-
-            var datePicker3 = new DatePicker({
-                input: $('#hw_example_input3'),
-                trigger: $('#hw_example_button3'),
-                startWithMonday: true
-                });
-            datePicker3.init();
-
-            var datePicker4 = new DatePicker({
-                input: $('#hw_example_input4'),
-                trigger: $('#hw_example_button4'),
-                dateFormat: 'mm/dd/yyyy'
-                });
-            datePicker4.init();
-
-            var datePicker5 = new DatePicker({
-                input: $('#hw_example_input5'),
-                trigger: $('#hw_example_button5'),
-                events: {
-                    onMonthChange: function(date, e){
-                        console.log(this);
-                        console.log(e);
-                        console.log(date);
-                        alert('Month changed');
-                    },
-                    onSelect: function(e){
-                        console.log(this);
-                        console.log(e);
-                        alert('Date selected');
-                    },
-                    onOpen: function(){
-                        console.log(this);
-                        alert('Opened.');
-                    },
-                    onClose: function(e){
-                        console.log(this);
-                        console.log(e);
-                        alert('Closed.');
-                    },
-                    onDateFocus: function(e, date){
-                        var date = datePicker1.i18n.monthName[date.getMonth()].substring(0,3) + ' ' + date.getDate() + ', ' + date.getFullYear();
-                        console.log(e);
-                        alert('Date Focused ' + date);
-                    }
-                }
-                });
-            datePicker5.init();
-
-            var datePicker6 = new DatePicker({
-                input: $('#hw_example_input6'),
-                trigger: $('#hw_example_button6'),
-                startWithMonday: true,
-                i18n: DatePickerI18n
-            });
-            datePicker6.init();
-
-            $('.button').click(function(e){
-                e.preventDefault();
-                var codeBlock = $(this).prev('.code');
-                if (codeBlock.hasClass('visible')){
-                    codeBlock.stop().animate({
-                        'height': 0
-                    }, 500, function(){
-                        $(this).removeClass('visible');
-                    });
-                } else {
-                    var height = codeBlock.find('pre').outerHeight();
-                    codeBlock.stop().addClass('visible').animate({
-                        'height': height
-                    }, 500);
-                }
-            });
-        });
-    </script>
+    
 </head>
 <body>
     <div class="header-wrap">
@@ -149,16 +38,14 @@
         </div>
     </div>
     <div class="redRibbonContainer">
-        <div class="redRibbon"><div class="ribbonSeam">
-            <div class="fb-share-button" data-href="https://hevyweb.github.io/hw.datepicker/demo/index.html" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhevyweb.github.io%2Fhw.datepicker%2Fdemo%2Findex.html&amp;src=sdkpreparse">Share</a></div>
-
-            <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
-            <script type="IN/Share" data-url="https://hevyweb.github.io/hw.datepicker/demo/index.html" data-counter="right"></script>
-
-            <a aria-label="Star hevyweb/hw.datepicker on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/hevyweb/hw.datepicker#stargazers_count" data-count-href="/hevyweb/hw.datepicker/stargazers" href="https://github.com/hevyweb/hw.datepicker" class="github-button">Star</a>
-             
-            </div>
+        <div class="redRibbon">
             <div class="ribbonLeft"><div class="ribbonSeam"></div></div>
+            <div class="ribbonSeam">
+                <div class="fb-share-button" data-href="https://hevyweb.github.io/hw.datepicker/demo/index.html" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhevyweb.github.io%2Fhw.datepicker%2Fdemo%2Findex.html&amp;src=sdkpreparse">Share</a></div>
+                <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script>
+                <script type="IN/Share" data-url="https://hevyweb.github.io/hw.datepicker/demo/index.html" data-counter="right"></script>
+                <a aria-label="Star hevyweb/hw.datepicker on GitHub" data-count-aria-label="# stargazers on GitHub" data-count-api="/repos/hevyweb/hw.datepicker#stargazers_count" data-count-href="/hevyweb/hw.datepicker/stargazers" href="https://github.com/hevyweb/hw.datepicker" class="github-button">Star</a>             
+            </div>
             <div class="ribbonRight"><div class="ribbonSeam"></div></div>
         </div>
     </div>
@@ -167,8 +54,8 @@
             <div class="box">
                 <div class="panel">
                     <div class="title">
-                        <h1>Simple example</h1>
-                        <h2>just try it...</h2>
+                        <h2>Simple example</h2>
+                        <div class="blockTitle">just try it...</div>
                     </div>
                     <div class="content">
                         <p class="example">
@@ -196,8 +83,8 @@ datePicker.init();
         <div class="box">
             <div class="panel">
                 <div class="title">
-                    <h1>Different events on date picker</h1>
-                    <h2>customize the date picker on your own</h2>
+                    <h2>Different events on date picker</h2>
+                    <div class="blockTitle">customize the date picker on your own</div>
                     <div class="clear"></div>
                 </div>
                 <div class="content">
@@ -248,8 +135,8 @@ datePicker.init();
             <div class="box">
                 <div class="panel">
                     <div class="title">
-                        <h1>It can start with Monday</h1>
-                        <h2>by default it starts with Sunday</h2>
+                        <h2>It can start with Monday</h2>
+                        <div class="blockTitle">by default it starts with Sunday</div>
                     </div>
                     <div class="clear"></div>
                     <div class="content">
@@ -277,8 +164,8 @@ datePicker.init();
         <div class="box">
             <div class="panel">
                 <div class="title">
-                  <h1>Multi language support</h1>
-                  <h2>add your own language</h2>
+                  <h2>Multi language support</h2>
+                  <div class="blockTitle">add your own language</div>
                 </div>
                 <div class="clear"></div>
                 <div class="content">
@@ -354,8 +241,8 @@ datePicker.init();
             <div class="box">
                 <div class="panel">
                     <div class="title">
-                        <h1>Example with date range</h1>
-                        <h2 id="daterange">Date range: </h2>
+                        <h2>Example with date range</h2>
+                        <div class="blockTitle" id="daterange">Date range: </div>
                     </div>
                     <div class="clear"></div>
                     <div class="content">
@@ -400,8 +287,8 @@ datePicker.init();
             <div class="box">
                 <div class="panel">
                     <div class="title">
-                        <h1>Picker allows different date formats</h1>
-                        <h2>Date format mm/dd/yyyy</h2>
+                        <h2>Picker allows different date formats</h2>
+                        <div class="blockTitle">Date format mm/dd/yyyy</div>
                     </div>
                     <div class="clear"></div>
                     <div class="content">
@@ -442,14 +329,91 @@ datePicker.init();
     </div>
 <div class="panel">
     <div class="footer-wrap">
-        <div class="title">
-            <h1>A few words from author</h1>
-            <h2></h2>
-        </div>
+        <h2 class="title">A few words from author</h2>
         <div class="content"> <img src="https://pp.vk.me/c604729/v604729156/28f48/WEos5URY8hE.jpg" alt="" />
             <p>I had a task to add nice datepicker, which has all basic needs and a little bit more. I checked a lot of them, but each one had some issues. The best of those I saw, was a jQuery UI datepicker, but I don't like that it's too big and does not support keyboard navigation out of the box.</p>
-            <p>History:</p>
-            <b>1.0.0</b>
+            <h2>History:</h2>
+            <h3>1.2.1</h3>
+            <ul>
+                <li>Full responsive support</li>
+            </ul>
+            <br>
+            <h3>1.2.0</h3>
+            <ul>
+                <li>Ability to be read by screen readers: NVDA and chromevox</li>
+            </ul>
+            <br>
+            <h3>1.1.0 <a href="https://github.com/hevyweb/hw.datepicker/releases/tag/1.1.0" class="linkToGitGub"></a></h3>
+            <ul>
+                <li>Added new event <b>onDateFocus</b></li>
+                <li>Added keyboard navigation
+                    <br>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Key</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="tableAction">Arrow left</td>
+                                <td>next date</td>
+                            </tr>
+                            <tr>
+                                <td class="tableAction">Arrow right</td>
+                                <td>previous date</td>
+                            </tr>
+                            <tr>
+                                <td class="tableAction">Arrow up</td>
+                                <td>1 week back</td>
+                            </tr>
+                            <tr>
+                                <td class="tableAction">Arrow down</td>
+                                <td>1 week ahead</td>
+                            </tr>
+                            <tr>
+                                <td class="tableAction">Home</td>
+                                <td>first day of the month</td>
+                            </tr>
+                            <tr>
+                                <td class="tableAction">End</td>
+                                <td>last day of the month</td>
+                            </tr>
+                            <tr>
+                                <td class="tableAction">Page up</td>
+                                <td>1 month back</td>
+                            </tr>
+                            <tr>
+                                <td class="tableAction">Page down</td>
+                                <td>1 month ahead</td>
+                            </tr>
+                            <tr>
+                                <td class="tableAction">Enter</td>
+                                <td>select current date</td>
+                            </tr>
+                            <tr>
+                                <td class="tableAction">Space</td>
+                                <td>select current date</td>
+                            </tr>
+                            <tr>
+                                <td class="tableAction">Esc</td>
+                                <td>close the datepicker</td>
+                            </tr>
+                            <tr>
+                                <td class="tableAction">Tab</td>
+                                <td>next date until the end of the current month</td>
+                            </tr>
+                            <tr>
+                                <td class="tableAction">Shift+Tab</td>
+                                <td>previous date until the very first day of the month and to the buttons, which change month</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
+            <br>
+            <h3>1.0.0</h3>
             <ul>
                 <li>Pick dates using mouse.</li>
                 <li>You can type the date manually. Datepicker highlights it in the calendar.</li>
@@ -460,91 +424,6 @@ datePicker.init();
                 <li>You can use your own language.</li>
             </ul>
             <br />
-            <b>1.1.0</b>
-            <ul>
-                <li>Added keyboard navigation
-                <br>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Key</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Arrow left</td>
-                        <td>next date</td>
-                    </tr>
-                    <tr>
-                        <td>Arrow right</td>
-                        <td>previous date</td>
-                    </tr>
-                    <tr>
-                        <td>Arrow up</td>
-                        <td>1 week back</td>
-                    </tr>
-                    <tr>
-                        <td>Arrow down</td>
-                        <td>1 week ahead</td>
-                    </tr>
-                    <tr>
-                        <td>Home</td>
-                        <td>first day of the month</td>
-                    </tr>
-                    <tr>
-                        <td>End</td>
-                        <td>last day of the month</td>
-                    </tr>
-                    <tr>
-                        <td>Page up</td>
-                        <td>1 month back</td>
-                    </tr>
-                    <tr>
-                        <td>Page down</td>
-                        <td>1 month ahead</td>
-                    </tr>
-                    <tr>
-                        <td>Enter</td>
-                        <td>select current date</td>
-                    </tr>
-                    <tr>
-                        <td>Space</td>
-                        <td>select current date</td>
-                    </tr>
-                    <tr>
-                        <td>Esc</td>
-                        <td>close the datepicker</td>
-                    </tr>
-                    <tr>
-                        <td>Tab</td>
-                        <td>next date until the end of the current month</td>
-                    </tr>
-                    <tr>
-                        <td>Shift+Tab</td>
-                        <td>previous date until the very first day of the month and to the buttons, which change month</td>
-                    </tr>
-                </tbody>
-            </table>
-                </li>
-                <li>Added new event <b>onDateFocus</b></li>
-            </ul>
-            <br>
-            <b>1.2.0</b>
-            <ul>
-                <li>Ability to be read by screen readers: NVDA and chromevox</li>
-            </ul>
-            <br>
-            <b>1.2.1</b>
-            <ul>
-                <li>Full responsive support</li>
-            </ul>
-            <br>
-            <p><b>In the future I plan to extend the functionality with additional features:</b></p>
-            <ul>
-                <li>Add composer file and update the config file for npm</li>
-                <li>Add method "desctroy"</li>
-            </ul>
         </div>
     </div>
 </div>
