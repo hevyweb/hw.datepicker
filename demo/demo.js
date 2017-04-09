@@ -57,37 +57,30 @@ $(document).ready(function(){
     datePicker4.init();
 
     var datePicker5 = new DatePicker({
-        input: $('#hw_example_input5'),
-        trigger: $('#hw_example_button5'),
+        input: $('#hw_example_input5.1'),
+        trigger: $('#hw_example_button5.1'),
         events: {
-            onMonthChange: function(date, e){
-                console.log(this);
-                console.log(e);
-                console.log(date);
-                alert('Month changed');
-            },
             onSelect: function(e){
                 console.log(this);
                 console.log(e);
                 alert('Date selected');
-            },
-            onOpen: function(){
-                console.log(this);
-                alert('Opened.');
-            },
-            onClose: function(e){
-                console.log(this);
-                console.log(e);
-                alert('Closed.');
-            },
-            onDateFocus: function(e, date){
-                var date = datePicker1.i18n.monthName[date.getMonth()].substring(0,3) + ' ' + date.getDate() + ', ' + date.getFullYear();
-                console.log(e);
-                alert('Date Focused ' + date);
             }
         }
         });
     datePicker5.init();
+
+    var datePicker5_2 = new DatePicker({
+        input: $('#hw_example_input5.2'),
+        trigger: $('#hw_example_button5.2'),
+        events: {
+            onSelect: function(e){
+                console.log(this);
+                console.log(e);
+                alert('Date selected');
+            }
+        }
+        });
+    datePicker5_2.init();
 
     var datePicker6 = new DatePicker({
         input: $('#hw_example_input6'),

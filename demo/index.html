@@ -84,14 +84,22 @@ datePicker.init();
             <div class="panel">
                 <div class="title">
                     <h2>Different events on date picker</h2>
-                    <div class="blockTitle">customize the date picker on your own</div>
+                    <div class="blockTitle">Use to select date range</div>
                     <div class="clear"></div>
                 </div>
                 <div class="content">
-                    <p class="example">
-                        <input type="text" id="hw_example_input5" />
-                        <button id="hw_example_button5">pick</button>
-                    </p>
+                    <div class="example">
+                        <div>
+                            <label for="hw_example_input5.1">From: </label>
+                            <input type="text" id="hw_example_input5.1" />
+                            <button id="hw_example_button5.1">pick</button>
+                        </div>
+                        <div>
+                            <label for="hw_example_input5.2">To: </label>
+                            <input type="text" id="hw_example_input5.2" />
+                            <button id="hw_example_button5.2">pick</button>
+                        </div>
+                    </div>
                     <div class="clear"></div>
                     <p>Currently date picker has 4 main events:</p>
                     <ul>
@@ -339,6 +347,9 @@ datePicker.init();
                 <li>Added composer file</li>
                 <li>Added new method "destroy" which removes datepicker functionality.</li>
                 <li>Added new event <b>onDestroy</b></li>
+                <li>Added button "Close" in the bottom which allows to close the datepicker. It's very convenient for mobile devices</li>
+                <li>Added button "Current date" which switch the date picker 
+                <li>When user closes the datepicker, focus goes back to trigger instead of input</li>
             </ul>
             <br>
             <h3>1.2.1</h3>
