@@ -56,27 +56,35 @@ $(document).ready(function(){
         });
     datePicker4.init();
 
-    var datePicker5 = new DatePicker({
-        input: $('#hw_example_input5.1'),
-        trigger: $('#hw_example_button5.1'),
+    var datePicker5_1 = new DatePicker({
+        input: $('#hw_example_input5_1'),
+        trigger: $('#hw_example_button5_1'),
         events: {
             onSelect: function(e){
-                console.log(this);
-                console.log(e);
-                alert('Date selected');
+                var currentButton = $(e.currentTarget);
+                var minDate = new Date();
+                minDate.setTime(currentButton.attr("data-date"));
+                datePicker5_2.minDate = minDate;
+                if (datePicker5_2.currentPicker != null) {
+                    datePicker5_2.monthChange(minDate);
+                }
             }
         }
         });
-    datePicker5.init();
+    datePicker5_1.init();
 
     var datePicker5_2 = new DatePicker({
-        input: $('#hw_example_input5.2'),
-        trigger: $('#hw_example_button5.2'),
+        input: $('#hw_example_input5_2'),
+        trigger: $('#hw_example_button5_2'),
         events: {
             onSelect: function(e){
-                console.log(this);
-                console.log(e);
-                alert('Date selected');
+                var currentButton = $(e.currentTarget);
+                var maxDate = new Date();
+                maxDate.setTime(currentButton.attr("data-date"));
+                datePicker5_1.maxDate = maxDate;
+                if (datePicker5_1.currentPicker != null) {
+                    datePicker5_1.monthChange(minDate);
+                }
             }
         }
         });
