@@ -1,3 +1,2 @@
 .npmignore
-demo
-index.html
+composer.json

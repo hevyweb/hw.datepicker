@@ -239,7 +239,7 @@ Datepicker also adjusts its position horizontally. By default left border of cal
 
 
 ## Demo page
-[https://hevyweb.github.io/hw.datepicker/demo](https://hevyweb.github.io/hw.datepicker/demo/index.html)
+[https://hevyweb.github.io/hw.datepicker-demo](https://hevyweb.github.io/hw.datepicker-demo/index.html)
 
 ### Author
 **Dmytro Dzyuba**
