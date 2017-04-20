@@ -126,6 +126,7 @@ var DatePicker = function(configs) {
         adjustPosition: function() {
             var $window = $(window);
             var inputPosition = this.input.offset();
+            var windowOffsetTop = $window.scrollTop();
             var windowWidth = $window.width();
             var pickerWidth = this.currentPicker.outerWidth();
             var left = inputPosition.left;
@@ -146,7 +147,7 @@ var DatePicker = function(configs) {
             var top = inputPosition.top + inputHeight;
             var windowHeight = $window.height();
             var pickerHeight = this.currentPicker.outerHeight(true);
-            if (top + pickerHeight > windowHeight){
+            if (top - windowOffsetTop + pickerHeight > windowHeight){
                 var bodyHeight = $("body").height();
                 if (top + pickerHeight < bodyHeight) {
                     $window.scrollTop(inputPosition.top);
@@ -182,7 +183,7 @@ var DatePicker = function(configs) {
                 this.events.onClose.call(this, e);
             }
             this.currentPicker.addClass("hw_closed").attr("aria-hidden", "true");
-            $("body").off("click.hw.datepicker.body", this.close);
+            $("body").off("click.hw.datepicker.body");
             this.trigger.focus();
         },
         
