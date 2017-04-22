@@ -133,7 +133,7 @@ var DatePicker = function(configs) {
             if (windowWidth > pickerWidth) {
                 if (left + pickerWidth > windowWidth) {
                     var right = left + this.input.width();
-                    if (right - pickerWidth < 0){                    
+                    if (right - pickerWidth < 0){
                         left = parseInt((windowWidth - (left + pickerWidth))/2);
                     } else{
                         left = right - pickerWidth;
@@ -250,8 +250,8 @@ var DatePicker = function(configs) {
                 .replace("yyyy", date.getFullYear());
         },
 
-        getFullDate: function(date) {
-            return this.i18n.monthName[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
+        getFullDate: function(date, dayName) {
+            return this.i18n.monthName[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear() + ", " + dayName;
         },
 
         getLastDate: function(date)
@@ -487,13 +487,13 @@ var DatePicker = function(configs) {
             return buttonContainer;
         },
 
-        renderCell: function(buttonDate, currentMonth) {
+        renderCell: function(buttonDate, currentMonth, dayName) {
             var inactive = false;
             var title = [];
             
             var button = $("<button />")
                 .attr({
-                    "aria-label": this.getFullDate(buttonDate),
+                    "aria-label": this.getFullDate(buttonDate, dayName),
                     "data-dayindex": buttonDate.getDay(),
                     "data-date": buttonDate.getTime(),
                     "tabindex": "0"
@@ -682,7 +682,7 @@ var DatePicker = function(configs) {
             while (dateTiker <= lastDay) {
                 row = this.renderRow(week);
                 for (var day = 0; day < 7; day++) {
-                    cell = this.renderCell(dateTiker, currentMonth);
+                    cell = this.renderCell(dateTiker, currentMonth, this.i18n.weekNameFull[day]);
                     row.append(cell);
                     button = cell.children("button");
                     if (button.hasClass("hw_default")){
